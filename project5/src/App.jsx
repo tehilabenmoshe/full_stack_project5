@@ -5,13 +5,16 @@ import Home from './pages/Home';
 import Todos from './pages/Todos';
 import Posts from './pages/Posts';
 import Albums from './pages/Albums';
+import Navbar from './components/Navbar';
 import './App.css'
 
 function App() {
 
 
   return (
-    <Routes>
+    <>
+      <Navbar/>
+      <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
@@ -20,6 +23,7 @@ function App() {
         <Route path="/albums" element={<Albums />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>  
+    </>
   )
 }
 
