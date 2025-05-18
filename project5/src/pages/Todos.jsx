@@ -1,9 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { getTodos } from "../services/todosService";
+import { getTodos, updateTodo, deleteTodo } from "../services/todosService";
 import TodoItem from "../components/TodoItem"; 
 
 export default function Todos() {
   const [todos, setTodos] = useState([]);
+
+
+  const handleSave = async (updatedTodo) => {
+    console.log("got todo in Todos:", updatedTodo);
+    try {
+        await updateTodo(updatedTodo);
+        setTodos((prevTodos) =>
+        prevTodos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)));
+        } catch (err) {
+            console.error("Failed to update todo", err);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await deleteTodo(id);
+            setTodos((prevTodos) => prevTodos.filter((t) => t.id !== id));
+        } catch (err) {
+            console.error("Failed to delete todo", err);
+        }
+    };
 
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user.id;
@@ -22,12 +43,13 @@ export default function Todos() {
       <h2>My Todos</h2>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>
-            <input type="checkbox" checked={todo.completed} readOnly />
-            <span style={{ marginLeft: "8px" }}>
-              #{todo.id} - {todo.title}
-            </span>
-          </li>
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onSave={handleSave}
+            onDelete={handleDelete}
+          />
+
         ))}
       </ul>
     </div>

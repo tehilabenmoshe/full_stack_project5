@@ -1,0 +1,44 @@
+.todo-note {
+  background: #fef68a;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px 0;
+  list-style: none;
+  position: relative;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-checkbox {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 16px;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+}
+
+.todo-input {
+  flex: 1;
+  font-size: 16px;
+  padding: 4px;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.todo-icon {
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+}
