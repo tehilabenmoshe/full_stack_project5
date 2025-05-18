@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate,Link } from 'react-router-dom';
 
 function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [verify, setVerify] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -38,8 +38,12 @@ function Register() {
     const createdUser = await createdRes.json();
 
     localStorage.setItem('user', JSON.stringify(createdUser));
-    navigate('/home');
+    setIsRegistered(true);
   };
+
+  if (isRegistered) {
+    return <Navigate to="/home" replace />;
+  }
 
   return (
     <div>
@@ -64,6 +68,7 @@ function Register() {
           onChange={(e) => setVerify(e.target.value)}
         /><br />
         <button type="submit">Register</button>
+        <p>Already have an account? <Link to="/login">Login</Link></p>
       </form>
       {error && <p>{error}</p>}
     </div>

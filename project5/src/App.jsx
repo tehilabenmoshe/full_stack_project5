@@ -9,7 +9,7 @@ import Navbar from './components/Navbar';
 import './App.css'
 
 function App() {
-
+  const user = localStorage.getItem('user');
 
   return (
     <>
@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={user? <Home />: <Login />} />
         <Route path="/todos" element={<Todos />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/albums" element={<Albums />} />

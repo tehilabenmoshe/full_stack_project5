@@ -1,5 +1,33 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
 .navbar{
     background-color: #d1cdcd;
+    width: 100%;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -13,7 +41,21 @@
     padding: 14px 16px;
     text-decoration: none;
 }
+
 .navbar a.active {
     background-color: #4CAF50;
     color: white;
+}
+
+.logout {
+    display: block;
+    color: #000;
+    margin-left: auto;
+    text-align: center;
+    background-color: transparent;
+}
+
+button:hover {
+  border-color: #000;
+  outline: 4px auto -webkit-focus-ring-color;
 }

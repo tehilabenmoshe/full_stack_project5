@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate , Link } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,11 +15,15 @@ function Login() {
 
     if (users.length > 0) {
       localStorage.setItem('user', JSON.stringify(users[0]));
-      navigate('/home');
-    } else {
+      setIsLoggedIn(true);
+    } 
+    else {
       setError('password or username is incorrect');
     }
   };
+  if (isLoggedIn) {
+    return <Navigate to="/home" replace />;
+  }
 
   return (
     <div>
@@ -38,6 +42,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         /><br />
         <button type="submit">Login</button>
+        <p>Don't have an account? <Link to="/register">Register</Link></p>
       </form>
       {error && <p>{error}</p>}
     </div>
