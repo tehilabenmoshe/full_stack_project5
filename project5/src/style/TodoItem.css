@@ -1,5 +1,6 @@
 .todo-note {
   width: 300px;
+  height: 150px;
   background: #fff2cd;
   border-radius: 8px;
   padding: 12px;
@@ -10,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .todo-checkbox {

@@ -4,7 +4,7 @@ import { updateTodo, deleteTodo } from "../services/todosService";
 import "../style/TodoItem.css";
 
 export default function TodoItem({ todo, onSave, onDelete}) {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(todo.isNew || false);
     const [editedTitle, setEditedTitle] = useState(todo.title);
 
 
@@ -13,6 +13,7 @@ export default function TodoItem({ todo, onSave, onDelete}) {
         const updated = {
             ...todo,
             title: editedTitle,
+            isNew: false,
         };
         console.log("saving...", updated);
         onSave(updated); // ← חייב להיות מוגדר כ־prop מההורה

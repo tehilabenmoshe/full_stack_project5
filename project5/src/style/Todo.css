@@ -1,16 +1,49 @@
 .todo-div {
   padding: 80px;
   background-color: rgb(255, 255, 255);
+  font-family: 'Urbanist';
 }
 
 h2{
     font-size: 35px;
+
 }
+
+.controls-row {
+  display: flex;
+  justify-content: flex-end;  /* ✅ הכל לצד ימין */
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
 
 .todo-list-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 28px;
   padding: 0;
   margin: 0;
+  align-items: center;
+  justify-content: center;
 }
+
+.search-bar{
+    margin-right: 50px;
+    height: 35px;
+    width: 400px;
+    border-radius: 8px;
+    padding-left: 10px;
+    border: none;
+    background-color: rgb(227, 227, 227);
+
+}
+
+.add-button {
+  font-size: 20px;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  float: right;
+  cursor: pointer;
+}
+

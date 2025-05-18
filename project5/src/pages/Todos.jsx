@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTodos, updateTodo, deleteTodo } from "../services/todosService";
+import { getTodos, updateTodo, deleteTodo, addTodo } from "../services/todosService";
 import TodoItem from "../components/TodoItem"; 
 import "../style/Todo.css";
 
@@ -22,15 +22,25 @@ export default function Todos() {
 
 
     const handleSave = async (updatedTodo) => {
-        console.log("got todo in Todos:", updatedTodo);
         try {
-            await updateTodo(updatedTodo);
-            setTodos((prevTodos) =>
-            prevTodos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)));
-            } catch (err) {
-                console.error("Failed to update todo", err);
+            let savedTodo;
+
+            if (updatedTodo.isNew) {
+                const { isNew, id, ...NewTodo } = updatedTodo;
+                savedTodo = await addTodo(NewTodo);
+                } else {
+                  savedTodo = await updateTodo(updatedTodo);
             }
+
+            // עדכון ברשימה עם הפתק החדש
+            setTodos((prevTodos) =>
+            prevTodos.map((t) => (t.id === updatedTodo.id ? savedTodo : t))
+            );
+        } catch (err) {
+            console.error("Failed to save todo", err);
+        }
     };
+
 
     const handleDelete = async (id) => {
         try {
@@ -60,6 +70,21 @@ export default function Todos() {
         return 0;
     });
 
+    const handleAddNew = () => {
+        const maxId = todos.length > 0 ? Math.max(...todos.map(t => t.id)) : 0;
+
+        const newTodo = {
+            id: maxId + 2,
+            title: "",
+            completed: false,
+            isNew: true
+        };
+
+        setTodos((prev) => [newTodo, ...prev]);
+    };
+
+
+
 
 
 
@@ -67,28 +92,32 @@ export default function Todos() {
     <div className="todo-div">
         <h2>My Task List</h2>
 
-        <label htmlFor="sort-select">Sort By </label>
+        <button onClick={handleAddNew} className="add-button">
+           ➕ Add Task
+        </button>
 
-        <select
-            id="sort-select"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+                
+        <div className="controls-row">
+            <label htmlFor="sort-select">Sort By </label>
+            <select
+                id="sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
             >
-            <option value="id"> Id</option>
-            <option value="title">header</option>
-            <option value="completed">status </option>
-        </select>
-    
-        <div style={{ margin: "16px 0" }}>
-            <input
+                <option value="id">Id</option>
+                <option value="title">Title</option>
+                <option value="completed">Status</option>
+            </select>
+
+            <input className="search-bar"
                 type="text"
-                placeholder="חפש לפי מזהה או כותרת..."
+                placeholder="search"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                style={{ padding: "6px", width: "250px" }}
             />
         </div>
-        
+
+                
         <ul className="todo-list-grid">
             {sortedTodos.map((todo) => (
             <TodoItem

@@ -33,3 +33,20 @@ export async function deleteTodo(id) {
 
   return true;
 }
+
+//POST - new todo
+export async function addTodo(todo) {
+  const response = await fetch(`${BASE_URL}/todos`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todo),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create todo");
+  }
+
+  return await response.json();
+}
