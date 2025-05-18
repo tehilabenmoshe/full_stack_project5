@@ -17,7 +17,6 @@ function App() {
   });
 
   useEffect(() => {
-    // Sync localStorage if needed
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
     } else {
