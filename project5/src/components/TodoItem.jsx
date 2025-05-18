@@ -50,13 +50,14 @@ export default function TodoItem({ todo, onSave, onDelete}) {
             </span>
         )}
         <div className="todo-actions">
-             <button onClick={handleSave} className="todo-button">
-                    Save
+            <button onClick={handleSave} className="todo-icon" title="Save">
+                <FaSave />
             </button>
-            <button onClick={handleDelete} className="todo-button delete">
-                Delete
+            <button onClick={handleDelete} className="todo-icon" title="Delete">
+                <FaTrash />
             </button>
-      </div>
+        </div>
+
     </li>    
   );
 }

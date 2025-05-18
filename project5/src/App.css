@@ -18,55 +18,43 @@ body {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+.navbar{
+    background-color: #d1cdcd;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+}
 
+.navbar a {
+    float: left;
+    display: block;
+    color: #000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.logout {
+    display: block;
+    color: #000;
+    margin-left: auto;
+    text-align: center;
+    background-color: transparent;
+}
 
 button:hover {
   border-color: #000;
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-.navbar {
-  background-color: #d1cdcd;
-  width: 100%;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
-  z-index: 999;
-}
-
-.nav-links a {
-  display: inline-block;
-  color: #000;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.nav-links a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.logout {
-  background: transparent;
-  border: none;
-  font-size: 1em;
-  cursor: pointer;
-  padding: 14px 16px;
-}
-
-.logout:hover {
-  background-color: #ccc;
 }

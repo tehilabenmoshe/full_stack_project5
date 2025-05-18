@@ -1,9 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { getTodos, updateTodo, deleteTodo } from "../services/todosService";
 import TodoItem from "../components/TodoItem"; 
+import "../style/Todo.css";
 
 export default function Todos() {
   const [todos, setTodos] = useState([]);
+  const [sortBy, setSortBy] = useState("id");
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user.id;
+
+
+    useEffect(() => {
+        if (userId) {
+        getTodos(userId).then(setTodos).catch((err) => {
+            console.error("Failed to load todos:", err);
+        });
+        }
+    }, [userId]);
 
 
   const handleSave = async (updatedTodo) => {
@@ -26,23 +40,40 @@ export default function Todos() {
         }
     };
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user.id;
+  
 
-
-  useEffect(() => {
-    if (userId) {
-      getTodos(userId).then(setTodos).catch((err) => {
-        console.error("Failed to load todos:", err);
-      });
+    const sortedTodos = [...todos].sort((a, b) => {
+    if (sortBy === "id") {
+        return a.id - b.id;
+    } else if (sortBy === "title") {
+        return a.title.localeCompare(b.title);
+    } else if (sortBy === "completed") {
+        return a.completed - b.completed; // false לפני true
     }
-  }, [userId]);
+    return 0;
+    });
+
+
+
+  
 
   return (
-    <div>
-      <h2>My Todos</h2>
-      <ul>
-        {todos.map((todo) => (
+    <div className="todo-div">
+      <h2>My Task List</h2>
+
+      <label htmlFor="sort-select">Sort By </label>
+      <select
+        id="sort-select"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        >
+        <option value="id"> Id</option>
+        <option value="title">header</option>
+        <option value="completed">status </option>
+      </select>
+
+      <ul className="todo-list-grid">
+        {sortedTodos.map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}
