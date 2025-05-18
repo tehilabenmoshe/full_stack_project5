@@ -3,7 +3,7 @@ import { Navigate,Link } from 'react-router-dom';
 
 function Register() {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [website, setWebsite] = useState('');
   const [verify, setVerify] = useState('');
   const [error, setError] = useState('');
   const [isRegistered, setIsRegistered] = useState(false);
@@ -11,7 +11,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== verify) {
+    if (website !== verify) {
       setError('the passwords do not match');
       return;
     }
@@ -23,26 +23,12 @@ function Register() {
       setError('username already exists');
       return;
     }
-
-    const newUser = {
-      username,
-      website: password
-    };
-
-    const createdRes = await fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser)
-    });
-
-    const createdUser = await createdRes.json();
-
-    localStorage.setItem('user', JSON.stringify(createdUser));
+    localStorage.setItem('tempUser', JSON.stringify({ username, website }));    
     setIsRegistered(true);
   };
 
   if (isRegistered) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/complete-registration" replace />;
   }
 
   return (
@@ -58,8 +44,8 @@ function Register() {
         <input
           type="password"
           placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
         /><br />
         <input
           type="password"

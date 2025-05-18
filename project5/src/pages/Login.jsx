@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Navigate , Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
-function Login() {
+function Login({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,13 +14,13 @@ function Login() {
     const users = await res.json();
 
     if (users.length > 0) {
-      localStorage.setItem('user', JSON.stringify(users[0]));
+      setUser(users[0]); 
       setIsLoggedIn(true);
-    } 
-    else {
+    } else {
       setError('password or username is incorrect');
     }
   };
+
   if (isLoggedIn) {
     return <Navigate to="/home" replace />;
   }
