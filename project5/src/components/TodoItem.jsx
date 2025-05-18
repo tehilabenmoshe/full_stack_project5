@@ -46,7 +46,9 @@ export default function TodoItem({ todo, onSave, onDelete}) {
                 className={`todo-text ${todo.completed ? "completed" : ""}`}
                 onClick={() => setIsEditing(true)}
             >
-                {editedTitle}
+                <span className="todo-id">TODO #{todo.id}</span>
+                <span className="todo-title">{editedTitle}</span>
+
             </span>
         )}
         <div className="todo-actions">

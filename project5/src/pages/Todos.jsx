@@ -4,11 +4,12 @@ import TodoItem from "../components/TodoItem";
 import "../style/Todo.css";
 
 export default function Todos() {
-  const [todos, setTodos] = useState([]);
-  const [sortBy, setSortBy] = useState("id");
+    const [todos, setTodos] = useState([]);
+    const [sortBy, setSortBy] = useState("id");
+    const [searchValue, setSearchValue] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user.id;
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.id;
 
 
     useEffect(() => {
@@ -20,15 +21,15 @@ export default function Todos() {
     }, [userId]);
 
 
-  const handleSave = async (updatedTodo) => {
-    console.log("got todo in Todos:", updatedTodo);
-    try {
-        await updateTodo(updatedTodo);
-        setTodos((prevTodos) =>
-        prevTodos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)));
-        } catch (err) {
-            console.error("Failed to update todo", err);
-        }
+    const handleSave = async (updatedTodo) => {
+        console.log("got todo in Todos:", updatedTodo);
+        try {
+            await updateTodo(updatedTodo);
+            setTodos((prevTodos) =>
+            prevTodos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)));
+            } catch (err) {
+                console.error("Failed to update todo", err);
+            }
     };
 
     const handleDelete = async (id) => {
@@ -40,49 +41,65 @@ export default function Todos() {
         }
     };
 
-  
 
-    const sortedTodos = [...todos].sort((a, b) => {
-    if (sortBy === "id") {
-        return a.id - b.id;
-    } else if (sortBy === "title") {
-        return a.title.localeCompare(b.title);
-    } else if (sortBy === "completed") {
-        return a.completed - b.completed; // false לפני true
-    }
-    return 0;
+    const filteredTodos = todos.filter((todo) => {
+        if (!searchValue) return true;
+
+        const value = searchValue.toLowerCase();
+        const idMatch = todo.id.toString().includes(value);
+        const titleMatch = todo.title.toLowerCase().includes(value);
+
+        return idMatch || titleMatch;
+    });
+
+
+    const sortedTodos = [...filteredTodos].sort((a, b) => {
+        if (sortBy === "id") return a.id - b.id;
+        if (sortBy === "title") return a.title.localeCompare(b.title);
+        if (sortBy === "completed") return a.completed - b.completed;
+        return 0;
     });
 
 
 
-  
 
   return (
     <div className="todo-div">
-      <h2>My Task List</h2>
+        <h2>My Task List</h2>
 
-      <label htmlFor="sort-select">Sort By </label>
-      <select
-        id="sort-select"
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-        >
-        <option value="id"> Id</option>
-        <option value="title">header</option>
-        <option value="completed">status </option>
-      </select>
+        <label htmlFor="sort-select">Sort By </label>
 
-      <ul className="todo-list-grid">
-        {sortedTodos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onSave={handleSave}
-            onDelete={handleDelete}
-          />
+        <select
+            id="sort-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            >
+            <option value="id"> Id</option>
+            <option value="title">header</option>
+            <option value="completed">status </option>
+        </select>
+    
+        <div style={{ margin: "16px 0" }}>
+            <input
+                type="text"
+                placeholder="חפש לפי מזהה או כותרת..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                style={{ padding: "6px", width: "250px" }}
+            />
+        </div>
+        
+        <ul className="todo-list-grid">
+            {sortedTodos.map((todo) => (
+            <TodoItem
+                key={todo.id}
+                todo={todo}
+                onSave={handleSave}
+                onDelete={handleDelete}
+            />
 
-        ))}
-      </ul>
+            ))}
+        </ul>
     </div>
   );
 }

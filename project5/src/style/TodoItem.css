@@ -47,3 +47,13 @@
   color: #333;
   margin: 5px;
 }
+
+.todo-id {
+  font-weight: bold;
+  display: block;
+}
+
+.todo-title {
+  display: block;
+  margin-top: 4px;
+}
