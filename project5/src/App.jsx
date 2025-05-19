@@ -28,9 +28,9 @@ function App() {
   }, [user]);
 
   return (
-    <>
+    <div className="app">
       {user && <Navbar setUser={setUser} />}
-      <Routes>
+      <Routes >
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/complete-registration" element={<CompleteRegistration setUser={setUser} />} />
@@ -45,7 +45,7 @@ function App() {
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

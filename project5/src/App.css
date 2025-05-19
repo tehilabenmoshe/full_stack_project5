@@ -17,6 +17,15 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+.app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px; 
+  padding-bottom: 20px;
+
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -32,6 +41,7 @@ button {
     overflow: hidden;
     position: fixed;
     top: 0;
+    z-index: 10;
 }
 
 .navbar a {
@@ -62,9 +72,14 @@ button:hover {
 }
 
 .albums-container {
-  max-width: 900px;
+  width: 90%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
+
 }
+
 
 .albums-search {
   margin-bottom: 16px;
@@ -118,7 +133,12 @@ button:hover {
   margin: 0 auto;
   padding: 20px;
 }
-
+.photos-header{
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-align: center;
+}
 .photos-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -214,4 +234,23 @@ button:hover {
   .photos-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.photo-details{
+  margin-left: 35vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.photo-details img{
+  object-fit: cover;
+  border-radius: 15px;
+}
+.photo-details h3{
+  font-size: 1.1rem;
+  margin: 10px 0;
+  font-weight: 300;
+  
 }

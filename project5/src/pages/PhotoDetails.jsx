@@ -14,9 +14,10 @@ export default function PhotoDetails() {
   if (!photo) return <div>Loading...</div>;
 
   return (
-    <div style={{ marginTop: 32 }}>
+    <div className="photo-details">
+      <img src={photo.url} alt={photo.title} />
       <h3>{photo.title}</h3>
-      <img src={photo.url} alt={photo.title} style={{ maxWidth: 400 }} />
+
     </div>
   );
 }

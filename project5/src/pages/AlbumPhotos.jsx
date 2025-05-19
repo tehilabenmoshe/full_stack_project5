@@ -48,8 +48,8 @@ export default function AlbumPhotos() {
   }
 
   return (
-    <div className="album-container">
-      <h2>Photos in Album {albumId}</h2>
+    <div className="photos-container">
+      <h2 className="photos-header">Album {albumId}</h2>
       
       <div className="photos-grid">
         {displayedPhotos.map(photo => (
@@ -73,7 +73,7 @@ export default function AlbumPhotos() {
       {hasMore && !loading && (
         <div className="load-more-container">
           <button onClick={loadMorePhotos} className="load-more-button">
-            reload more
+            Load more
           </button>
         </div>
       )}
