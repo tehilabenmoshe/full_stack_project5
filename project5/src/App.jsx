@@ -9,6 +9,8 @@ import Albums from './pages/Albums';
 import Navbar from './components/Navbar';
 import Info from './pages/Info';
 import CompleteRegistration from './pages/CompleteRegistration';
+import AlbumPhotos from './pages/AlbumPhotos';
+import PhotoDetails from './pages/PhotoDetails';
 import './App.css';
 
 function App() {
@@ -36,7 +38,11 @@ function App() {
         <Route path="/info" element={user ? <Info /> : <Navigate to="/login" />} />
         <Route path="/todos" element={user ? <Todos /> : <Navigate to="/login" />} />
         <Route path="/posts" element={user ? <Posts /> : <Navigate to="/login" />} />
-        <Route path="/albums" element={user ? <Albums /> : <Navigate to="/login" />} />
+        <Route path="/albums" element={user ? <Albums /> : <Navigate to="/login" />}>
+          <Route path=":albumId" element={user ? <AlbumPhotos /> : <Navigate to="/login" />}>
+            <Route path="photos/:photoId" element={user ? <PhotoDetails /> : <Navigate to="/login" />} />
+          </Route>
+        </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>

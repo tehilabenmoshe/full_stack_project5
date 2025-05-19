@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div>
       <h1>Welcome{user ? `, ${user.name || user.username}` : ''}!</h1>
-      <div style={{ margin: 30 }}>
+      <div>
         <button onClick={() => navigate('/todos')} >Todos</button>
         <button onClick={() => navigate('/posts')} >Posts</button>
         <button onClick={() => navigate('/albums')} >Albums</button>
