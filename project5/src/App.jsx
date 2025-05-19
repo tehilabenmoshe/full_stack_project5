@@ -7,6 +7,7 @@ import Todos from './pages/Todos';
 import Posts from './pages/Posts';
 import Albums from './pages/Albums';
 import Navbar from './components/Navbar';
+import Info from './pages/Info';
 import CompleteRegistration from './pages/CompleteRegistration';
 import './App.css';
 
@@ -30,8 +31,9 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/complete-registration" element={<CompleteRegistration />} />
+        <Route path="/complete-registration" element={<CompleteRegistration setUser={setUser} />} />
         <Route path="/home" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/info" element={user ? <Info /> : <Navigate to="/login" />} />
         <Route path="/todos" element={user ? <Todos /> : <Navigate to="/login" />} />
         <Route path="/posts" element={user ? <Posts /> : <Navigate to="/login" />} />
         <Route path="/albums" element={user ? <Albums /> : <Navigate to="/login" />} />

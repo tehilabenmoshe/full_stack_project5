@@ -28,7 +28,7 @@ function Register() {
   };
 
   if (isRegistered) {
-    return <Navigate to="/complete-registration" replace />;
+    return <Navigate to="/complete-registration"  replace />;
   }
 
   return (

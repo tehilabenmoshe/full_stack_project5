@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 
-function CompleteRegistration() {
+function CompleteRegistration({setUser}) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [street, setStreet] = useState('');
@@ -54,6 +54,7 @@ function CompleteRegistration() {
         const saved = await res.json();
         localStorage.setItem('user', JSON.stringify(saved));
         localStorage.removeItem('tempUser');
+        setUser(saved);
         setIsComplete(true);
         alert('User saved successfully!');
       } else {
@@ -61,7 +62,7 @@ function CompleteRegistration() {
       }
     } catch (err) {
       console.error(err);
-      alert('An error occurred while saving the user.');
+      alert('An error happend while saving the user.');
     }
   };
 
