@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTodos, updateTodo, deleteTodo, addTodo } from "../services/todosService";
+import { getTodos, updateTodo, deleteTodo, addTodo, getAllTodos } from "../services/todosService";
 import TodoItem from "../components/TodoItem"; 
 import "../style/Todo.css";
 
@@ -21,20 +21,11 @@ export default function Todos() {
     }, [userId]);
 
 
-    const handleSave = async (updatedTodo) => {
+    const handleSave = async (todo) => {
         try {
-            let savedTodo;
-
-            if (updatedTodo.isNew) {
-                const { isNew, id, ...NewTodo } = updatedTodo;
-                savedTodo = await addTodo(NewTodo);
-                } else {
-                  savedTodo = await updateTodo(updatedTodo);
-            }
-
-            // עדכון ברשימה עם הפתק החדש
-            setTodos((prevTodos) =>
-            prevTodos.map((t) => (t.id === updatedTodo.id ? savedTodo : t))
+            const saved = await updateTodo(todo);  // ← שליחה לשרת
+            setTodos(prev =>
+            prev.map(t => (t.id === todo.id ? saved : t))  // עדכון ברשימה
             );
         } catch (err) {
             console.error("Failed to save todo", err);
@@ -42,7 +33,10 @@ export default function Todos() {
     };
 
 
+
     const handleDelete = async (id) => {
+        const todo = todos.find(t => t.id === id);
+
         try {
             await deleteTodo(id);
             setTodos((prevTodos) => prevTodos.filter((t) => t.id !== id));
@@ -50,6 +44,7 @@ export default function Todos() {
             console.error("Failed to delete todo", err);
         }
     };
+
 
 
     const filteredTodos = todos.filter((todo) => {
@@ -70,20 +65,32 @@ export default function Todos() {
         return 0;
     });
 
-    const handleAddNew = () => {
-        const maxId = todos.length > 0 ? Math.max(...todos.map(t => t.id)) : 0;
 
-        const newTodo = {
-            id: maxId + 2,
-            title: "",
-            completed: false,
-            isNew: true
-        };
 
-        setTodos((prev) => [newTodo, ...prev]);
+    const handleAddNew = async () => {
+        try {
+            // שלבי 1: שליפת כל הפתקים מכל המשתמשים כדי למצוא את המזהה הגבוה ביותר
+            const allTodos = await getAllTodos();  
+            const maxId = allTodos.length > 0 ? Math.max(...allTodos.map(t => t.id)) : 0;
+
+            // שלב 2: בניית הפתק החדש
+            const newTodo = {
+                userId: userId,
+                //id: maxId + 1,
+                title: "",
+                completed: false,
+            };
+
+            // שלב 3: שליחה מיידית לשרת
+            const savedTodo = await addTodo(newTodo);
+
+            // שלב 4: הוספה לרשימה המקומית (state)
+            setTodos(prev => [savedTodo, ...prev]);
+
+        } catch (err) {
+            console.error("❌ Failed to create new todo:", err);
+        }
     };
-
-
 
 
 

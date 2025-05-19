@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaSave, FaTrash } from "react-icons/fa"; // אייקונים
-import { updateTodo, deleteTodo } from "../services/todosService";
 import "../style/TodoItem.css";
 
 export default function TodoItem({ todo, onSave, onDelete}) {
@@ -13,7 +12,6 @@ export default function TodoItem({ todo, onSave, onDelete}) {
         const updated = {
             ...todo,
             title: editedTitle,
-            isNew: false,
         };
         console.log("saving...", updated);
         onSave(updated); // ← חייב להיות מוגדר כ־prop מההורה

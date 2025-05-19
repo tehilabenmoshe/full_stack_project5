@@ -4,6 +4,7 @@ export async function getTodos(userId) {
   const response = await fetch(`${BASE_URL}/todos?userId=${userId}`);
   return await response.json();
 }
+
 // עדכון פריט (PUT)
 export async function updateTodo(todo) {
   const response = await fetch(`${BASE_URL}/todos/${todo.id}`, {
@@ -49,4 +50,11 @@ export async function addTodo(todo) {
   }
 
   return await response.json();
+}
+
+//GET ALL
+export async function getAllTodos() {
+  const res = await fetch(`${BASE_URL}/todos`);
+  if (!res.ok) throw new Error("Failed to load all todos");
+  return await res.json();
 }

@@ -1,11 +1,12 @@
 .todo-div {
-  padding: 80px;
+  padding-top: 250px;
   background-color: rgb(255, 255, 255);
   font-family: 'Urbanist';
 }
 
 h2{
     font-size: 35px;
+    padding-left: 200px;
 
 }
 
@@ -15,6 +16,7 @@ h2{
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
+  
 }
 
 
@@ -45,5 +47,6 @@ h2{
   margin-bottom: 10px;
   float: right;
   cursor: pointer;
+  margin-right: 200px;
 }
 
