@@ -28,7 +28,7 @@ function App() {
   }, [user]);
 
   return (
-    <div className="app">
+    <div>
       {user && <Navbar setUser={setUser} />}
       <Routes >
         <Route path="/login" element={<Login setUser={setUser} />} />

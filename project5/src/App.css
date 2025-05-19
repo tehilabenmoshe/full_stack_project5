@@ -41,7 +41,7 @@ button {
     overflow: hidden;
     position: fixed;
     top: 0;
-    z-index: 10;
+    z-index: 5;
 }
 
 .navbar a {
@@ -51,6 +51,7 @@ button {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    
 }
 
 .navbar a.active {
