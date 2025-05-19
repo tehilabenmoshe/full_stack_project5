@@ -22,12 +22,22 @@ export default function TodoItem({ todo, onSave, onDelete}) {
     const handleDelete = () => {
         onDelete(todo.id);
     };
+
+    const handleToggleComplete = () => {
+        const updated = {
+        ...todo,
+        completed: !todo.completed,
+        };
+        onSave(updated);
+
+    }
         
     return (
       <li className="todo-note">
         <input
             type="checkbox"
             checked={todo.completed}
+            onChange={handleToggleComplete} 
             readOnly
             className="todo-checkbox"
         />
