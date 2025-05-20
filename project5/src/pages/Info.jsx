@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
+import { FaEdit ,FaUserCircle } from "react-icons/fa";
+
 
 function renderUserInfo(obj, edited, setEdited, editing, parentKey = '') {
   return (
-    <ul className='user-details'>
+    <ul className="user-details">
       {Object.entries(obj).map(([key, value]) => {
-        if (key === 'id'||key==='website') return null; //don't show the id and password
+        if (key === 'id' || key === 'website' ||key==='name') return null;
         const fieldPath = parentKey ? `${parentKey}.${key}` : key;
-        if (value && typeof value === 'object' && !Array.isArray(value)) { //if it is an object go deeper
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
           return (
             <li key={fieldPath}>
               <strong>{key}:</strong>
-              {Object.keys(value).length > 0 
-                ? renderUserInfo(value, edited, setEdited, editing, fieldPath)
-                : <span> </span>}
+              <div className="nested-info">
+                {Object.keys(value).length > 0
+                  ? renderUserInfo(value, edited, setEdited, editing, fieldPath)
+                  : <span> </span>}
+              </div>
             </li>
           );
-        } else { //no object
+        } else {
           return (
             <li key={fieldPath}>
               <strong>{key}:</strong>{' '}
@@ -82,37 +86,43 @@ function Info() {
 
   const handleSave = async () => {
     if (!user) return;
-    const updatedUser = applyEdits(user, edited); //create an object with the updated values
+    const updatedUser = applyEdits(user, edited);
 
     await fetch(`http://localhost:3000/users/${user.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedUser), //send the updated object to the server
+      body: JSON.stringify(updatedUser),
     });
 
-    localStorage.setItem('user', JSON.stringify(updatedUser)); //update the local storage
+    localStorage.setItem('user', JSON.stringify(updatedUser));
     setUser(updatedUser);
     setEditing(false);
     setEdited({});
   };
 
   if (!user) {
-    return <div>No connected user</div>;
+    return <div className="info">No connected user</div>;
   }
 
   return (
-    <div className='info'>
-      <div >
-        <h2>User details</h2>
-        {!editing && (
-          <button onClick={handleEdit}>Edit</button>
-        )}
+    <div className="info">
+      <div className="info-header">
+        <FaUserCircle className='user-icon'/>
+        <h2> {user.name || ''}</h2> 
+           {!editing && (
+          <button className="edit-btn" onClick={handleEdit}>
+            <FaEdit />
+          </button>
+        )} 
       </div>
+   
+
       {renderUserInfo(user, edited, setEdited, editing)} 
+
       {editing && (
-        <div>
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+        <div className="action-buttons">
+          <button className="save-btn" onClick={handleSave}>Save</button>
+          <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
         </div>
       )}
     </div>

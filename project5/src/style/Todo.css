@@ -1,10 +1,10 @@
 .todo-div {
-  padding-top: 250px;
+  padding-top: 900px;
   background-color: rgb(255, 255, 255);
   font-family: 'Urbanist';
 }
 
-h2{
+.todo-div h2{
     font-size: 35px;
     padding-left: 200px;
 
@@ -12,7 +12,7 @@ h2{
 
 .controls-row {
   display: flex;
-  justify-content: flex-end;  /* ✅ הכל לצד ימין */
+  justify-content: flex-end; 
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
