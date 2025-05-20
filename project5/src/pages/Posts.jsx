@@ -32,7 +32,6 @@ export default function Posts() {
     });
 
 
- 
 
   return (
     <div>
@@ -45,11 +44,9 @@ export default function Posts() {
             onChange={(e) => setSearchValue(e.target.value)}
        />
 
-
-
       <ul>
         {filteredPosts.map((post) => (
-          <PostItem key={post.id} post={post} />
+          <PostItem key={post.id} post={post} user={user}/>
         ))}
       </ul>
     </div>

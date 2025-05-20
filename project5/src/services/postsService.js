@@ -20,3 +20,19 @@ export async function getComments(postId) {
 }
 
 
+//ADD NEW COMMENT
+export async function addComment(newComment) {
+  const response = await fetch(`${BASE_URL}/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newComment),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add comment");
+  }
+
+  return await response.json();
+}
