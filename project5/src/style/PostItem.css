@@ -1,0 +1,44 @@
+.post-item {
+  list-style-type: none;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.post-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.2s;
+}
+
+.post-card:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.post-body {
+  margin-top: 10px;
+  color: #333;
+}
+
+
+.comments-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-list {
+  margin-top: 10px;
+  padding-left: 15px;
+}
+
+.comment {
+  margin-bottom: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
+}

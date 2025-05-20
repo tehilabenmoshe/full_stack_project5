@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaSave, FaTrash } from "react-icons/fa"; // אייקונים
 import "../style/TodoItem.css";
 
+
 export default function TodoItem({ todo, onSave, onDelete}) {
     const [isEditing, setIsEditing] = useState(todo.isNew || false);
     const [editedTitle, setEditedTitle] = useState(todo.title);
