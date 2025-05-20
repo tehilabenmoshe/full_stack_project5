@@ -30,6 +30,7 @@ function App() {
   return (
     <div>
       {user && <Navbar setUser={setUser} />}
+      <div className="page-container">
       <Routes >
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
@@ -45,6 +46,7 @@ function App() {
         </Route>
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
+    </div>
     </div>
   );
 }

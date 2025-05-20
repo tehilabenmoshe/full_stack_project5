@@ -63,14 +63,13 @@ function Albums() {
         {showAdd ? 'Cancel' : '+ Add Album'}
       </button>
       {showAdd && (
-        <form onSubmit={handleAddAlbum} style={{ marginBottom: 16 }}>
+        <form onSubmit={handleAddAlbum}>
           <input
             type="text"
             placeholder="Album title"
             value={newTitle}
             onChange={e => setNewTitle(e.target.value)}
             required
-            style={{ marginRight: 8 }}
           />
           <button type="submit">Save</button>
         </form>
