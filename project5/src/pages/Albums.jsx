@@ -6,7 +6,10 @@ function Albums() {
   const [search, setSearch] = useState('');
   const [filtered, setFiltered] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [showAdd, setShowAdd] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
   const { albumId } = useParams(); 
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
@@ -30,6 +33,25 @@ function Albums() {
     );
   }, [search, albums]);
 
+  const handleAddAlbum = async (e) => {
+    e.preventDefault();
+    if (!newTitle.trim() || !userId) return;
+    const newAlbum = {
+      userId,
+      title: newTitle.trim()
+    };
+    const res = await fetch('http://localhost:3000/albums', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newAlbum)
+    });
+    const created = await res.json();
+    setAlbums(prev => [...prev, created]);
+    setFiltered(prev => [...prev, created]);
+    setShowAdd(false);
+    setNewTitle('');
+  };
+
   if (albumId) {
     return <Outlet />;
   }
@@ -37,6 +59,22 @@ function Albums() {
   return (
     <div className="albums-container">
       <h1>Albums</h1>
+      <button onClick={() => setShowAdd(s => !s)} >
+        {showAdd ? 'Cancel' : '+ Add Album'}
+      </button>
+      {showAdd && (
+        <form onSubmit={handleAddAlbum} style={{ marginBottom: 16 }}>
+          <input
+            type="text"
+            placeholder="Album title"
+            value={newTitle}
+            onChange={e => setNewTitle(e.target.value)}
+            required
+            style={{ marginRight: 8 }}
+          />
+          <button type="submit">Save</button>
+        </form>
+      )}
       <input
         type="text"
         placeholder="Search by id or title..."

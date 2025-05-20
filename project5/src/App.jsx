@@ -43,7 +43,7 @@ function App() {
             <Route path="photos/:photoId" element={user ? <PhotoDetails /> : <Navigate to="/login" />} />
           </Route>
         </Route>
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </div>
   );
