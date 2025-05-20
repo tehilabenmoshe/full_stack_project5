@@ -1,4 +1,4 @@
-import { getComments, addComment } from "../services/postsService"; 
+import { getComments, addComment, deleteComment, updateComment  } from "../services/postsService"; 
 import React, { useState } from "react";
 
 export default function PostItem({post, user}){
@@ -8,8 +8,9 @@ export default function PostItem({post, user}){
     const [showAddForm, setShowAddForm] = useState(false);
     const [commentTitle, setCommentTitle] = useState("");
     const [commentBody, setCommentBody] = useState("");
-
-
+    const [editingCommentId, setEditingCommentId] = useState(null);
+    const [editTitle, setEditTitle] = useState("");
+    const [editBody, setEditBody] = useState("");
 
     const toggleExpanded = () => setExpanded(!expanded);
 
@@ -49,6 +50,41 @@ export default function PostItem({post, user}){
         }
     };
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+            await deleteComment(commentId);
+            setComments(comments.filter((c) => c.id !== commentId));
+        } catch (error) {
+            console.error("Failed to delete comment:", error);
+        }
+        };
+
+        const handleStartEdit = (comment) => {
+        setEditingCommentId(comment.id);
+        setEditTitle(comment.name);
+        setEditBody(comment.body);
+    };
+
+    const handleSaveEdit = async () => {
+        const updated = {
+            postId: post.id,
+            userId: user.id,
+            name: editTitle.trim(),
+            email: user.email,
+            body: editBody.trim(),
+        };
+
+        try {
+            const saved = await updateComment(editingCommentId, updated);
+            setComments(comments.map((c) => (c.id === editingCommentId ? saved : c)));
+            setEditingCommentId(null);
+            setEditTitle("");
+            setEditBody("");
+        } catch (error) {
+            console.error("Failed to update comment:", error);
+        }
+    };
+
     return (
         <li className="post-item" onClick={toggleExpanded}>
             <div className="post-card">
@@ -72,14 +108,42 @@ export default function PostItem({post, user}){
 
                     {showComments && (
                     <>
-                        <ul className="comment-list">
+                       <ul className="comment-list">
                             {comments.map((comment) => (
                                 <li key={comment.id} className="comment">
-                                    <strong>{comment.name}</strong> ({comment.email})<br />
-                                    <p>{comment.body}</p>
+                                    {editingCommentId === comment.id ? (
+                                        <div>
+                                            <input
+                                                value={editTitle}
+                                                onChange={(e) => setEditTitle(e.target.value)}
+                                                style={{ width: "100%", marginBottom: "5px" }}
+                                            />
+                                            <textarea
+                                                value={editBody}
+                                                onChange={(e) => setEditBody(e.target.value)}
+                                                rows={2}
+                                                style={{ width: "100%", marginBottom: "5px" }}
+                                            />
+                                            <button onClick={handleSaveEdit}>שמור</button>
+                                            <button onClick={() => setEditingCommentId(null)}>ביטול</button>
+                                        </div>
+                                    ) : (
+                                        <>
+                                        <strong>{comment.name}</strong> ({comment.email})<br />
+                                        <p>{comment.body}</p>
+                                        </>
+                                    )}
+
+                                    {comment.email === user.email && editingCommentId !== comment.id && (
+                                        <div className="comment-actions">
+                                        <button onClick={() => handleDeleteComment(comment.id)}>🗑️ מחק</button>
+                                        <button onClick={() => handleStartEdit(comment)}>✏️ ערוך</button>
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>
+
 
                         <button
                             onClick={(e) => {
