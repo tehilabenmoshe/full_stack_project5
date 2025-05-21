@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPosts} from "../services/postsService";
+import { getPosts, deletePost, updatePost} from "../services/postsService";
 import PostItem from "../components/PostItem"
 import "../style/PostItem.css";
 
@@ -31,6 +31,28 @@ export default function Posts() {
         return idMatch || titleMatch;
     });
 
+    const handleDelete = async (id) => {
+        const post = posts.find(t => t.id === id);
+
+        try {
+            await deletePost(id);
+            setPosts((prevPrev) => prevPrev.filter((t) => t.id !== id));
+        } catch (err) {
+            console.error("Failed to delete todo", err);
+        }
+    };
+
+    const handleSave = async (post) => {
+        try {
+            const saved = await updatePost(post);  // ← שליחה לשרת
+            setPosts(prev =>
+            prev.map(t => (t.id === post.id ? saved : t))  // עדכון ברשימה
+            );
+        } catch (err) {
+            console.error("Failed to save post", err);
+        }
+    };
+
 
 
   return (
@@ -46,7 +68,13 @@ export default function Posts() {
 
       <ul>
         {filteredPosts.map((post) => (
-          <PostItem key={post.id} post={post} user={user}/>
+          <PostItem 
+                key={post.id}
+                post={post} 
+                user={user}
+                onSave={handleSave}
+                onDelete={handleDelete}
+            />
         ))}
       </ul>
     </div>

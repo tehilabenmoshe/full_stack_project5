@@ -1,7 +1,8 @@
-import { getComments, addComment, deleteComment, updateComment  } from "../services/postsService"; 
+import { getComments, addComment, deleteComment, updateComment } from "../services/postsService"; 
 import React, { useState } from "react";
+import { FaSave, FaTrash } from "react-icons/fa"; // אייקונים
 
-export default function PostItem({post, user}){
+export default function PostItem({post, user,onSave, onDelete }){
     const [expanded, setExpanded] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState([]);
@@ -11,6 +12,11 @@ export default function PostItem({post, user}){
     const [editingCommentId, setEditingCommentId] = useState(null);
     const [editTitle, setEditTitle] = useState("");
     const [editBody, setEditBody] = useState("");
+    const [editBodyPost, setEditBodyPost] = useState("");
+    const [editTitlePost, setEditTitlePost] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
+
+
 
     const toggleExpanded = () => setExpanded(!expanded);
 
@@ -85,16 +91,59 @@ export default function PostItem({post, user}){
         }
     };
 
+
+    const handleSave = () => {
+        const updated = {
+            ...post,
+            title: editTitlePost,
+            body: editBodyPost
+        };
+        console.log("saving...", updated);
+        onSave(updated); 
+        setIsEditing(false);
+    };
+
+
+    const handleDelete = () => {
+        onDelete(post.id);
+    };
+
     return (
         <li className="post-item" onClick={toggleExpanded}>
             <div className="post-card">
                 <strong>ID:</strong> {post.id} <br />
                 <strong>Title:</strong> {post.title}
+                <div className="post-action">
+                    <button onClick={handleSave} className="todo-icon" title="Save">
+                        <FaSave />
+                    </button>
+                    <button onClick={handleDelete} className="todo-icon" title="Delete">
+                        <FaTrash />
+                    </button>
+                </div>
 
                 {expanded && (
                 <div className="post-body" onClick={(e) => e.stopPropagation()}>
                     <strong>Body:</strong>
-                    <p>{post.body}</p>
+                    {isEditing ? (
+                        <textarea
+                            value={editBodyPost}
+                            onChange={(e) => setEditBodyPost(e.target.value)}
+                            rows={3}
+                            style={{ width: "100%", marginBottom: "5px" }}
+                        />
+                    ) : (
+                        <p
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsEditing(true);
+                                setEditTitlePost(post.title);
+                                setEditBodyPost(post.body);
+                            }}
+                        >
+                            {post.body}
+                        </p>
+                    )}
 
                     <button
                         onClick={(e) => {

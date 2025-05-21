@@ -1,6 +1,9 @@
 const BASE_URL = "http://localhost:3000"; 
 
-//GET BY ID
+
+//------------------------------------------------POSTS---------------------------------------------
+
+//GET POST BY ID
 export async function getPosts(userId) {
   const response = await fetch(`${BASE_URL}/posts?userId=${userId}`);
   if (!response.ok) {
@@ -9,6 +12,37 @@ export async function getPosts(userId) {
   return await response.json();
 }
 
+// DELETE POST
+export async function deletePost(postId) {
+  const response = await fetch(`${BASE_URL}/posts/${postId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete post");
+  }
+}
+
+
+// UPDATE POST
+export async function updatePost(post) {
+  const response = await fetch(`${BASE_URL}/posts/${post.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(post),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update post");
+  }
+
+  return await response.json();
+}
+
+
+//-----------------------------------------------COMMENTS-------------------------------------------------
 
 //GET COMMENT BY ID
 export async function getComments(postId) {
