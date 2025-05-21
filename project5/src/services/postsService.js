@@ -12,6 +12,13 @@ export async function getPosts(userId) {
   return await response.json();
 }
 
+//GET ALL POSTS
+export async function getAllPosts() {
+  const res = await fetch(`${BASE_URL}/posts`);
+  if (!res.ok) throw new Error("Failed to load all posts");
+  return await res.json();
+}
+
 // DELETE POST
 export async function deletePost(postId) {
   const response = await fetch(`${BASE_URL}/posts/${postId}`, {
@@ -22,6 +29,24 @@ export async function deletePost(postId) {
     throw new Error("Failed to delete post");
   }
 }
+
+//ADD POST 
+export async function addPost(post) {
+  const response = await fetch(`${BASE_URL}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(post),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create post");
+  }
+
+  return await response.json();
+}
+
 
 
 // UPDATE POST

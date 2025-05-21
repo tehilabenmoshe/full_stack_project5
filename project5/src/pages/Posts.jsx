@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, deletePost, updatePost} from "../services/postsService";
+import { getPosts, deletePost, updatePost, addPost} from "../services/postsService";
 import PostItem from "../components/PostItem"
 import "../style/PostItem.css";
+import "../style/Posts.css";
+
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -38,7 +40,7 @@ export default function Posts() {
             await deletePost(id);
             setPosts((prevPrev) => prevPrev.filter((t) => t.id !== id));
         } catch (err) {
-            console.error("Failed to delete todo", err);
+            console.error("Failed to delete post", err);
         }
     };
 
@@ -53,18 +55,40 @@ export default function Posts() {
         }
     };
 
+    const handleAddNew = async () => {
+        try {
+            const newPost = {
+                userId: userId,
+                title: "",
+                body:""
+            }; 
+            const savedPost = await addPost(newPost);
+
+            // שלב 4: הוספה לרשימה המקומית (state)
+            setPosts(prev => [{ ...savedPost, isEditing: true }, ...prev]);
+
+
+        } catch (err) {
+            console.error("❌ Failed to create new post:", err);
+        }
+    };
+    
+
 
 
   return (
-    <div>
+    <div className="posts-main-div">
       <h2>Your Posts </h2>
 
-      <input className="search-bar"
+       <input className="search-bar"
             type="text"
             placeholder="search"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
        />
+       <button onClick={handleAddNew} className="add-button">
+           ➕ Add New Post
+       </button>
 
       <ul>
         {filteredPosts.map((post) => (

@@ -1,12 +1,11 @@
 .todo-div {
-  padding-top: 900px;
+
   background-color: rgb(255, 255, 255);
   font-family: 'Urbanist';
 }
 
 .todo-div h2{
     font-size: 35px;
-    padding-left: 200px;
 
 }
 

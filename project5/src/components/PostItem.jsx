@@ -14,7 +14,8 @@ export default function PostItem({post, user,onSave, onDelete }){
     const [editBody, setEditBody] = useState("");
     const [editBodyPost, setEditBodyPost] = useState("");
     const [editTitlePost, setEditTitlePost] = useState("");
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(post.isEditing || false);
+
 
 
 
@@ -112,7 +113,27 @@ export default function PostItem({post, user,onSave, onDelete }){
         <li className="post-item" onClick={toggleExpanded}>
             <div className="post-card">
                 <strong>ID:</strong> {post.id} <br />
-                <strong>Title:</strong> {post.title}
+                
+                {isEditing ? (
+                    <input
+                        value={editTitlePost}
+                        onChange={(e) => setEditTitlePost(e.target.value)}
+                        style={{ width: "100%", marginBottom: "5px", fontSize: "1rem" }}
+                    />
+                ) : (
+                    <strong
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsEditing(true);
+                            setEditTitlePost(post.title);
+                            setEditBodyPost(post.body);
+                        }}
+                    >
+                        Title: {post.title}
+                    </strong>
+                )}
+
+
                 <div className="post-action">
                     <button onClick={handleSave} className="todo-icon" title="Save">
                         <FaSave />
