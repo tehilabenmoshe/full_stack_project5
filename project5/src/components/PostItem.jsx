@@ -14,8 +14,7 @@ export default function PostItem({post, user,onSave, onDelete }){
     const [editBody, setEditBody] = useState("");
     const [editBodyPost, setEditBodyPost] = useState("");
     const [editTitlePost, setEditTitlePost] = useState("");
-    const [isEditing, setIsEditing] = useState(post.isEditing || false);
-
+    const [isEditing, setIsEditing] = useState(false);
 
 
 
@@ -121,16 +120,7 @@ export default function PostItem({post, user,onSave, onDelete }){
                         style={{ width: "100%", marginBottom: "5px", fontSize: "1rem" }}
                     />
                 ) : (
-                    <strong
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsEditing(true);
-                            setEditTitlePost(post.title);
-                            setEditBodyPost(post.body);
-                        }}
-                    >
-                        Title: {post.title}
-                    </strong>
+                    <strong>Title: {post.title}</strong>
                 )}
 
 
@@ -141,6 +131,19 @@ export default function PostItem({post, user,onSave, onDelete }){
                     <button onClick={handleDelete} className="todo-icon" title="Delete">
                         <FaTrash />
                     </button>
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsEditing(true);
+                            setEditTitlePost(post.title);
+                            setEditBodyPost(post.body);
+                        }}
+                        className="todo-icon"
+                        title="Edit"
+                        >
+                        ✏️
+                    </button>
+
                 </div>
 
                 {expanded && (
@@ -154,16 +157,8 @@ export default function PostItem({post, user,onSave, onDelete }){
                             style={{ width: "100%", marginBottom: "5px" }}
                         />
                     ) : (
-                        <p
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setIsEditing(true);
-                                setEditTitlePost(post.title);
-                                setEditBodyPost(post.body);
-                            }}
-                        >
-                            {post.body}
-                        </p>
+                        <p>{post.body}</p>
+
                     )}
 
                     <button
@@ -175,6 +170,8 @@ export default function PostItem({post, user,onSave, onDelete }){
                         >
                         {showComments ? "Hide Comments" : "Show Comments"}
                     </button>
+
+                    
 
                     {showComments && (
                     <>
