@@ -46,7 +46,7 @@ button {
   background-color: white;
   position: flex;
   align-items: center;
-  padding: 8px 10px; /* אופציונלי לרווח פנימי ימינה ושמאלה */
+  padding: 8px 10px; 
   z-index: 1000; 
   margin-bottom:50px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -257,7 +257,6 @@ button {
 
 }
 
-
 .albums-search {
   margin-bottom: 16px;
   width: 100%;
@@ -309,11 +308,33 @@ button {
   padding: 20px;
 }
 .photos-header{
-  font-size: 2rem;
-  font-weight: 300;
+  font-size: 1.5rem;
+  font-weight:200;
   margin-bottom: 20px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  position: relative; 
 }
+.photos-header button {
+  position: absolute;
+  left: 20px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: black;
+  border: 1px solid #0078d4;
+  height: 40px;
+  width: fit-content;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.photos-header button:hover {
+  background-color: #5a9ff7;
+  transition: background-color 0.3s;
+}
+
 .photos-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -341,6 +362,8 @@ button {
   height: 150px;
   object-fit: cover;     
 }
+
+
 
 div.photo-title {
   padding: 8px;
@@ -426,14 +449,13 @@ div.photo-title {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  text-align: center;
   gap: 20px;
 }
 
 .photo-details{
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 60%;
+  left: 350%;  
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -454,21 +476,27 @@ div.photo-title {
 
 .back-button{
   color: black;
+  margin-left:20%;
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s;
   align-self: start;
+}
+.back-button:hover {
+  background-color: #f0f0f0;
+  color: #333;
+  transform: scale(1.2);
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
 /******************info********************************/
 
 .info {
-  width: 450px;
+  width: 550px;
   padding: 30px 40px;
-  margin: 50% 0 0 70%;
+  margin: 5% 0 0 50%;
   background-color: #f1eeee;
   border: 1px solid #000;
   border-radius: 12px;
@@ -486,7 +514,7 @@ div.photo-title {
 }
 
 .info-header h2 {
-  font-size: 22px;
+  font-size: 25px;
   display: flex;
   align-items: center;
   margin: 0;
@@ -495,7 +523,7 @@ div.photo-title {
 
 .info-header h2 i {
   color: #555;
-  font-size: 24px;
+  font-size: 27px;
 }
 
 .user-icon{
@@ -507,7 +535,7 @@ div.photo-title {
 .user-details {
   list-style: none;
   padding-left: 0;
-  font-size: 15px;
+  font-size: 20px;
   color: #444;
 }
 

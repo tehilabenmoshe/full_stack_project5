@@ -111,13 +111,14 @@ export default function AlbumPhotos() {
 
   return (
     <div className="photos-container">
-      <h2 className="photos-header">Album {albumId}</h2>
-
-      <button onClick={() => setShowAdd(s => !s)} >
-        {showAdd ? <FaTimes /> : <FaPlus />}
-      </button>
+      <div className="photos-header">
+        <h2 >Album {albumId}</h2>
+        <button onClick={() => setShowAdd(s => !s)} >
+          {showAdd ? <><FaTimes /> Cancel</> : <><FaPlus /> Add Photo</> }
+        </button>
+      </div>
       {showAdd && (
-        <form onSubmit={handleAddPhoto} >
+        <form onSubmit={handleAddPhoto} className='photo-add-form'>
           <input
             type="text"
             placeholder="Photo title"
@@ -136,7 +137,6 @@ export default function AlbumPhotos() {
           <button type="submit"><FaSave/></button>
         </form>
       )}
-
       <div className="photos-grid">
         {displayedPhotos.map(photo => (
           <div key={photo.id} className="photo-item">
