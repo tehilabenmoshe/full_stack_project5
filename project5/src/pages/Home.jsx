@@ -24,20 +24,34 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-image">
-          <img src="/assets/dashboard-illustration.png" alt="dashboard illustration" />
+          <img src="./assets/albums.png" alt="dashboard illustration" />
         </div>
       </section>
 
       <section className="feature-section">
         <div className="feature-text">
-          <h2>Beautiful Visual Management</h2>
+          <h2>MANAGE ALL YOUR TODOS</h2>
           <p>Track your Todos, manage Posts, view Albums and Info with a modern and user-friendly interface.</p>
-          <button className="demo-button">Get a Demo</button>
-        </div>
-        <div className="feature-image">
-          <img src="/assets/feature-illustration.png" alt="feature visual" />
+          <button className="demo-button" onClick={() => navigate('/todos')}>Todos</button>
         </div>
       </section>
+
+      <section className="hero-section">
+        <div className="feature-text">
+          <h2>RESPONES OTHER'S POSTS</h2>
+          <p>Track your Todos, manage Posts, view Albums and Info with a modern and user-friendly interface.</p>
+          <button className="demo-button" onClick={() => navigate('/posts')}>Posts</button>
+        </div>
+      </section>
+
+      <section className="feature-section">
+        <div className="feature-text">
+          <h2>WATCH YOUR ALBUMS</h2>
+          <p>Track your Todos, manage Posts, view Albums and Info with a modern and user-friendly interface.</p>
+          <button className="demo-button" onClick={() => navigate('/albums')}>Albums</button>
+        </div>
+      </section>
+
 
       <section className="footer-section">
         <p>Made with ❤️ byTamar & Tehila | 2025</p>

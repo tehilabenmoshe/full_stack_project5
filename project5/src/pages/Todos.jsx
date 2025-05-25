@@ -96,46 +96,50 @@ export default function Todos() {
 
 
   return (
-    <div className="todo-div">
-        <h2>My Task List</h2>
+    <div className="todos-wrapper">
+        <div className="todo-div">
+            <h2 className="todos-title">My Task List</h2>
 
-        <button onClick={handleAddNew} className="add-button">
-          + Add Task
-        </button>
+            <button onClick={handleAddNew} className="add-button">
+            + Add Task
+            </button>
 
-                
-        <div className="controls-row">
-            <label htmlFor="sort-select">Sort By </label>
-            <select
-                id="sort-select"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-            >
-                <option value="id">Id</option>
-                <option value="title">Title</option>
-                <option value="completed">Status</option>
-            </select>
+                    
+            <div className="controls-row">
+                <label htmlFor="sort-select">Sort By </label>
+                <select
+                    id="sort-select"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                >
+                    <option value="id">Id</option>
+                    <option value="title">Title</option>
+                    <option value="completed">Status</option>
+                </select>
 
-            <input className="search-bar"
-                type="text"
-                placeholder="search"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-            />
+                <input className="search-bar"
+                    type="text"
+                    placeholder="search"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                />
+            </div>
+
+                    
+            <ul className="todo-list-grid">
+                {sortedTodos.map((todo) => (
+                <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    onSave={handleSave}
+                    onDelete={handleDelete}
+                />
+
+                ))}
+            </ul>
         </div>
 
-                
-        <ul className="todo-list-grid">
-            {sortedTodos.map((todo) => (
-            <TodoItem
-                key={todo.id}
-                todo={todo}
-                onSave={handleSave}
-                onDelete={handleDelete}
-            />
-
-            ))}
-        </ul>
     </div>
+   
   );
 }
