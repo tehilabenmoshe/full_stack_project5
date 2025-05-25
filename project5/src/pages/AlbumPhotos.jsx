@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react';
 import { FaSave,FaEdit, FaTrash,FaPlus,FaTimes } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 
-
 export default function AlbumPhotos() {
   const { albumId, photoId } = useParams();
-  const [photos, setPhotos] = useState([]);
   const [displayedPhotos, setDisplayedPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -17,37 +15,39 @@ export default function AlbumPhotos() {
   const [editPhoto, setEditPhoto] = useState({ title: '', url: '' });
   const photosPerPage = 15; // 3 rows of 5 photos
 
-  useEffect(() => {
+  // Load photos from server with pagination
+  const loadPhotos = async (pageNum) => {
     setLoading(true);
-    fetch(`http://localhost:3000/photos?albumId=${albumId}`)
-      .then(res => res.json())
-      .then(data => {
-        setPhotos(data);
-        setDisplayedPhotos(data.slice(0, photosPerPage)); // Load initial photos
-        setHasMore(data.length > photosPerPage);
-        setLoading(false);
-      });
+    try {
+      const start = (pageNum - 1) * photosPerPage;
+      const res = await fetch(`http://localhost:3000/photos?albumId=${albumId}&_start=${start}&_limit=${photosPerPage}`);
+      const data = await res.json();
+      
+      if (pageNum === 1) {
+        setDisplayedPhotos(data);
+      } else {
+        setDisplayedPhotos(prev => [...prev, ...data]);
+      }
+      
+      // If we got fewer photos than requested, we've reached the end
+      setHasMore(data.length === photosPerPage);
+    } catch (error) {
+      console.error('Failed to load photos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Load initial photos
+  useEffect(() => {
+    loadPhotos(1);
   }, [albumId]);
 
   const loadMorePhotos = () => {
     if (!hasMore || loading) return;
-    
-    setLoading(true);
-    
     const nextPage = page + 1;
-    const startIndex = (nextPage - 1) * photosPerPage;
-    const endIndex = nextPage * photosPerPage;
-    
-    setTimeout(() => {
-      setDisplayedPhotos(prevPhotos => [
-        ...prevPhotos,
-        ...photos.slice(startIndex, endIndex)
-      ]); //add the next photos page
-      
-      setPage(nextPage);
-      setHasMore(endIndex < photos.length);
-      setLoading(false);
-    }, 300); // Small delay to simulate loading
+    setPage(nextPage);
+    loadPhotos(nextPage);
   };
 
   // Add photo
@@ -66,8 +66,7 @@ export default function AlbumPhotos() {
       body: JSON.stringify(photoToAdd)
     });
     const created = await res.json();
-    setPhotos(prev => [...prev, created]);
-    setDisplayedPhotos(prev => [...prev, created]);
+    setDisplayedPhotos(prev => [created, ...prev]); // Add to beginning
     setShowAdd(false);
     setNewPhoto({ title: '', url: '' });
   };
@@ -75,7 +74,6 @@ export default function AlbumPhotos() {
   // Delete photo
   const handleDeletePhoto = async (id) => {
     await fetch(`http://localhost:3000/photos/${id}`, { method: 'DELETE' });
-    setPhotos(prev => prev.filter(photo => photo.id !== id));
     setDisplayedPhotos(prev => prev.filter(photo => photo.id !== id));
   };
 
@@ -98,11 +96,6 @@ export default function AlbumPhotos() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedPhoto)
     });
-    setPhotos(prev =>
-      prev.map(photo =>
-        photo.id === editPhotoId ? { ...photo, ...updatedPhoto } : photo
-      )
-    );
     setDisplayedPhotos(prev =>
       prev.map(photo =>
         photo.id === editPhotoId ? { ...photo, ...updatedPhoto } : photo
@@ -195,7 +188,7 @@ export default function AlbumPhotos() {
         </div>
       )}
       
-      {!hasMore && photos.length > 0 && (
+      {!hasMore && displayedPhotos.length > 0 && (
         <div className="end-message">
           <p>there are no more photos</p>
         </div>
