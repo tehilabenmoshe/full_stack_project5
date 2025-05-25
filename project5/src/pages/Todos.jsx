@@ -100,7 +100,7 @@ export default function Todos() {
         <h2>My Task List</h2>
 
         <button onClick={handleAddNew} className="add-button">
-           ➕ Add Task
+          + Add Task
         </button>
 
                 

@@ -109,147 +109,127 @@ export default function PostItem({post, user,onSave, onDelete }){
     };
 
     return (
-        <li className="post-item" onClick={toggleExpanded}>
-            <div className="post-card">
-                <strong>ID:</strong> {post.id} <br />
-                
+        <li className="post-item">
+        <div className="post-container">
+            <div className="post-actions">
+                <button className="action-button" onClick={handleSave} title="Save"><FaSave /></button>
+                <button className="action-button" onClick={handleDelete} title="Delete"><FaTrash /></button>
+                <button
+                    className="action-button"
+                    onClick={(e) => {
+                    e.stopPropagation();
+                    setIsEditing(true);
+                    setEditTitlePost(post.title);
+                    setEditBodyPost(post.body);
+                    }}
+                    title="Edit"
+                >✏️</button>
+            </div>
+
+            <div className="post-title-box">
+            {isEditing ? (
+                <input
+                value={editTitlePost}
+                onChange={(e) => setEditTitlePost(e.target.value)}
+                style={{ width: "100%", fontSize: "1rem" }}
+                />
+            ) : (
+                <h3>{post.title}</h3>
+            )}
+            </div>
+
+            <button className="show-more-button" onClick={() => setExpanded((prev) => !prev)}>
+                {expanded ? "Hide" : "Show More"}
+            </button>
+
+            {expanded && (
+            <div className="post-body">
                 {isEditing ? (
-                    <input
-                        value={editTitlePost}
-                        onChange={(e) => setEditTitlePost(e.target.value)}
-                        style={{ width: "100%", marginBottom: "5px", fontSize: "1rem" }}
-                    />
+                <textarea
+                    value={editBodyPost}
+                    onChange={(e) => setEditBodyPost(e.target.value)}
+                    rows={3}
+                    style={{ width: "100%", marginBottom: "5px" }}
+                />
                 ) : (
-                    <strong>Title: {post.title}</strong>
+                <p>{post.body}</p>
                 )}
 
+                <button onClick={handleShowComments} className="comments-button">
+                {showComments ? "Hide Comments" : "Show Comments"}
+                </button>
 
-                <div className="post-action">
-                    <button onClick={handleSave} className="todo-icon" title="Save">
-                        <FaSave />
-                    </button>
-                    <button onClick={handleDelete} className="todo-icon" title="Delete">
-                        <FaTrash />
-                    </button>
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsEditing(true);
-                            setEditTitlePost(post.title);
-                            setEditBodyPost(post.body);
-                        }}
-                        className="todo-icon"
-                        title="Edit"
-                        >
-                        ✏️
-                    </button>
-
-                </div>
-
-                {expanded && (
-                <div className="post-body" onClick={(e) => e.stopPropagation()}>
-                    <strong>Body:</strong>
-                    {isEditing ? (
-                        <textarea
-                            value={editBodyPost}
-                            onChange={(e) => setEditBodyPost(e.target.value)}
-                            rows={3}
-                            style={{ width: "100%", marginBottom: "5px" }}
-                        />
-                    ) : (
-                        <p>{post.body}</p>
-
-                    )}
-
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleShowComments();
-                        }}
-                        className="comments-button"
-                        >
-                        {showComments ? "Hide Comments" : "Show Comments"}
-                    </button>
-
-                    
-
-                    {showComments && (
-                    <>
-                       <ul className="comment-list">
-                            {comments.map((comment) => (
-                                <li key={comment.id} className="comment">
-                                    {editingCommentId === comment.id ? (
-                                        <div>
-                                            <input
-                                                value={editTitle}
-                                                onChange={(e) => setEditTitle(e.target.value)}
-                                                style={{ width: "100%", marginBottom: "5px" }}
-                                            />
-                                            <textarea
-                                                value={editBody}
-                                                onChange={(e) => setEditBody(e.target.value)}
-                                                rows={2}
-                                                style={{ width: "100%", marginBottom: "5px" }}
-                                            />
-                                            <button onClick={handleSaveEdit}>שמור</button>
-                                            <button onClick={() => setEditingCommentId(null)}>ביטול</button>
-                                        </div>
-                                    ) : (
-                                        <>
-                                        <strong>{comment.name}</strong> ({comment.email})<br />
-                                        <p>{comment.body}</p>
-                                        </>
-                                    )}
-
-                                    {comment.email === user.email && editingCommentId !== comment.id && (
-                                        <div className="comment-actions">
-                                        <button onClick={() => handleDeleteComment(comment.id)}>🗑️ מחק</button>
-                                        <button onClick={() => handleStartEdit(comment)}>✏️ ערוך</button>
-                                        </div>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-
-
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowAddForm(!showAddForm);
-                            }}
-                            >
-                            {showAddForm ? "ביטול" : "➕ הוסף תגובה"}
-                        </button>
-
-                        {showAddForm && (
-                            <form onSubmit={handleAddComment}>
-                                <input
-                                    type="text"
-                                    placeholder="כותרת תגובה"
-                                    value={commentTitle}
-                                    onChange={(e) => setCommentTitle(e.target.value)}
-                                    required
-                                    style={{ width: "100%", padding: "10px", fontSize: "1rem" }}
-                                />
-                                <br />
-                                <textarea
-                                    placeholder="תוכן תגובה"
-                                    value={commentBody}
-                                    onChange={(e) => setCommentBody(e.target.value)}
-                                    rows={2}
-                                    required
-                                    style={{ width: "100%", padding: "10px", fontSize: "1rem" }}
-                                />
-                                <br />
-                                <button type="submit">שלח</button>
-                            </form>
+                {showComments && (
+                <>
+                    <ul className="comment-list">
+                    {comments.map((comment) => (
+                        <li key={comment.id} className="comment">
+                        {editingCommentId === comment.id ? (
+                            <div>
+                            <input
+                                value={editTitle}
+                                onChange={(e) => setEditTitle(e.target.value)}
+                                style={{ width: "100%", marginBottom: "5px" }}
+                            />
+                            <textarea
+                                value={editBody}
+                                onChange={(e) => setEditBody(e.target.value)}
+                                rows={2}
+                                style={{ width: "100%", marginBottom: "5px" }}
+                            />
+                            <button onClick={handleSaveEdit}>שמור</button>
+                            <button onClick={() => setEditingCommentId(null)}>ביטול</button>
+                            </div>
+                        ) : (
+                            <>
+                            <strong>{comment.name}</strong> ({comment.email})<br />
+                            <p>{comment.body}</p>
+                            </>
                         )}
 
-                    </>
+                        {comment.email === user.email && editingCommentId !== comment.id && (
+                            <div className="comment-actions">
+                            <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+                            <button onClick={() => handleStartEdit(comment)}>Edit</button>
+                            </div>
+                        )}
+                        </li>
+                    ))}
+                    </ul>
+
+                    <button
+                    onClick={() => setShowAddForm(!showAddForm)}
+                    className="add-comment-button"
+                    >
+                    {showAddForm ? "Cancel" : "+ Add Comment"}
+                    </button>
+
+                    {showAddForm && (
+                    <form onSubmit={handleAddComment} className="add-comment-form">
+                        <input
+                        type="text"
+                        placeholder="כותרת תגובה"
+                        value={commentTitle}
+                        onChange={(e) => setCommentTitle(e.target.value)}
+                        required
+                        style={{ width: "100%", padding: "10px", fontSize: "1rem" }}
+                        />
+                        <textarea
+                        placeholder="תוכן תגובה"
+                        value={commentBody}
+                        onChange={(e) => setCommentBody(e.target.value)}
+                        rows={2}
+                        required
+                        style={{ width: "100%", padding: "10px", fontSize: "1rem", marginTop: "8px" }}
+                        />
+                        <button type="submit" style={{ marginTop: "10px" }}>שלח</button>
+                    </form>
                     )}
-                </div>
+                </>
                 )}
             </div>
+            )}
+        </div>
         </li>
     );
 
