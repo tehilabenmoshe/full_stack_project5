@@ -114,7 +114,18 @@ export default function PostItem({post, user, onSave, onDelete }){
         <div className="post-container">
             <div className="post-actions">
                 <button className="action-button" onClick={handleSave} title="Save"><FaSave /></button>
-                <button className="action-button" onClick={handleDelete} title="Delete"><FaTrash /></button>
+                <button
+                    className="action-button"
+                    title="Delete"
+                    onClick={() => {
+                        if (window.confirm("Are you sure you want to delete this comment?")) {
+                        handleDeleteComment(editingCommentId);
+                        }
+                    }}
+                    >
+                    <FaTrash />
+                </button>
+
                 <button
                     className="action-button"
                     onClick={(e) => {
@@ -182,8 +193,8 @@ export default function PostItem({post, user, onSave, onDelete }){
                                 rows={2}
                                 style={{ width: "100%", marginBottom: "5px" }}
                             />
-                            <button onClick={handleSaveEdit}>שמור</button>
-                            <button onClick={() => setEditingCommentId(null)}>ביטול</button>
+                            <button className="personal-comment-btn" onClick={handleSaveEdit}>save</button>
+                            <button className="personal-comment-btn" onClick={() => setEditingCommentId(null)}>cancel</button>
                             </div>
                         ) : (
                             <>
@@ -194,8 +205,8 @@ export default function PostItem({post, user, onSave, onDelete }){
 
                         {comment.email === user.email && editingCommentId !== comment.id && (
                             <div className="comment-actions">
-                            <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
-                            <button onClick={() => handleStartEdit(comment)}>Edit</button>
+                            <button className="personal-comment-btn" onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+                            <button className="personal-comment-btn" onClick={() => handleStartEdit(comment)}>Edit</button>
                             </div>
                         )}
                         </li>
@@ -212,22 +223,20 @@ export default function PostItem({post, user, onSave, onDelete }){
                     {showAddForm && (
                     <form onSubmit={handleAddComment} className="add-comment-form">
                         <input
-                        type="text"
-                        placeholder="כותרת תגובה"
-                        value={commentTitle}
-                        onChange={(e) => setCommentTitle(e.target.value)}
-                        required
-                        style={{ width: "100%", padding: "10px", fontSize: "1rem" }}
+                            type="text"
+                            placeholder="header"
+                            value={commentTitle}
+                            onChange={(e) => setCommentTitle(e.target.value)}
+                            required
                         />
                         <textarea
-                        placeholder="תוכן תגובה"
-                        value={commentBody}
-                        onChange={(e) => setCommentBody(e.target.value)}
-                        rows={2}
-                        required
-                        style={{ width: "100%", padding: "10px", fontSize: "1rem", marginTop: "8px" }}
+                            placeholder="content"
+                            value={commentBody}
+                            onChange={(e) => setCommentBody(e.target.value)}
+                            rows={2}
+                            required
                         />
-                        <button type="submit" style={{ marginTop: "10px" }}>שלח</button>
+                        <button className="update-comment" type="submit" style={{ marginTop: "10px" }}>update comment</button>
                     </form>
                     )}
                 </>
