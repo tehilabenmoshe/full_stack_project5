@@ -965,6 +965,61 @@ div.photo-title {
   box-shadow: 0 0 0 3px rgba(201, 79, 207, 0.2);
 }
 
-/**{
-  outline: orangered 2px solid;
-}*/
+/*************************comlpate register page************************/
+.complete-registration-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #8bbee7, #d9a7c7);
+  font-family: 'Urbanist', sans-serif;
+  padding: 20px;
+}
+
+.complete-registration-form {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.complete-registration-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0c003e;
+  font-size: 28px;
+}
+
+.complete-registration-form input {
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.complete-registration-form input:focus {
+  border-color: #5a9ff7;
+}
+
+.complete-registration-form button {
+  background: linear-gradient(to right, #c94fcf, #5a9ff7);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.complete-registration-form button:hover {
+  opacity: 0.85;
+}
+
