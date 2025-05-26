@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
+import '../style/Register.css'; // שימוש באותו קובץ CSS כדי לשמור על אחידות
 
 function Login({ setUser }) {
   const [username, setUsername] = useState('');
@@ -14,10 +15,10 @@ function Login({ setUser }) {
     const users = await res.json();
 
     if (users.length > 0) {
-      setUser(users[0]); 
+      setUser(users[0]);
       setIsLoggedIn(true);
     } else {
-      setError('password or username is incorrect');
+      setError('Password or username is incorrect');
     }
   };
 
@@ -26,25 +27,33 @@ function Login({ setUser }) {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        /><br />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        /><br />
-        <button type="submit">Login</button>
-        <p>Don't have an account? <Link to="/register">Register</Link></p>
-      </form>
-      {error && <p>{error}</p>}
+    <div className="register-page">
+      <div className="register-left">
+        <h1>Welcome Back</h1>
+        <p>Log in to manage your tasks, posts, and albums.</p>
+      </div>
+      <div className="register-right">
+        <h2>User Login</h2>
+        <form onSubmit={handleLogin} className="register-form">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+          <p className="login-link">Don't have an account? <Link to="/register">Register</Link></p>
+        </form>
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 }

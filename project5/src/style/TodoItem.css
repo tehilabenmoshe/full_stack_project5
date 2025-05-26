@@ -1,28 +1,61 @@
 .todo-note {
   width: 300px;
   height: 150px;
-  background: #fff2cd;
-  border-radius: 8px;
+  border: 2px solid #f5f2e5;
   padding: 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   list-style: none;
   position: relative;
- 
+  background: #fef9e6; 
+  border-radius: 20px; 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
   
 }
 
+.todo-note:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+
 .todo-checkbox {
+  appearance: none; /* מסיר עיצוב ברירת מחדל */
+  width: 20px;
+  height: 20px;
+  border-radius: 25px;
+ 
+  background-color: #c94fcf76;
+  cursor: pointer;
+  position: relative;
   margin-right: 10px;
-  transform: scale(1.2);
-  border: none;
+}
+
+/* כשה-checkbox מסומן */
+.todo-checkbox:checked {
+  background-color: #5a9ff7;
+  border-color: #5a9ff7;
+}
+
+/* ה-V שבתוך התיבה */
+.todo-checkbox:checked::after {
+  content: '✔';
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 4px;
 }
 
 .todo-text {
   flex: 1;
   font-size: 16px;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  cursor: pointer
 }
 
 .todo-text.completed {
@@ -30,24 +63,41 @@
 }
 
 .todo-input {
-  flex: 1;
   font-size: 16px;
-  padding: 4px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.2s ease;
 }
 
+
 .todo-actions {
-  background-color: transparent;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
   display: flex;
   gap: 0px;
-  margin-left: 15px;
+ 
+
 }
+
 
 .todo-icon {
   background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 16px;
+  color: #646464;
   cursor: pointer;
-  font-size: 18px;
-  color: #333;
-  margin: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  
+}
+.todo-icon:hover {
+  background-color: #5a9ff7;
+  color: white;
+  border-color: #5a9ff7;
 }
 
 .todo-id {

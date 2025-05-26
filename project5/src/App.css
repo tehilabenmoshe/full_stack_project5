@@ -29,6 +29,13 @@ html{
   height: 100%;
 }
 
+a {
+  color: #2b7ee9;
+  text-decoration: none;
+  
+}
+
+
 /**{
   outline: 2px solid red; 
 }*/
@@ -635,5 +642,31 @@ div.photo-title {
 
 .info .cancel-btn:hover {
   background-color: #ccc;
+}
+
+.search-bar{
+   appearance: none; /* מסיר את הסגנון הדפדפני */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  margin-right: 50px;
+  height: 35px;
+  width: 400px;
+  border-radius: 25px;
+  padding-left: 10px;
+  border: 2px solid #78b1fa;
+  background-color: rgb(255, 255, 255);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar:hover{
+    border-color: #3383e5;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #c94fcf;
+  box-shadow: 0 0 0 3px rgba(201, 79, 207, 0.2);
 }
 
