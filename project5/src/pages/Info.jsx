@@ -106,6 +106,7 @@ function Info() {
 
   return (
     <div className="info">
+      <div className='info-card'>
       <div className="info-header">
         <FaUserCircle className='user-icon'/>
         <h2> {user.name || ''}</h2> 
@@ -125,6 +126,7 @@ function Info() {
           <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
         </div>
       )}
+    </div>
     </div>
   );
 }
