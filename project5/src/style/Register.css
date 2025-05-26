@@ -1,14 +1,15 @@
+.page-container{
+  padding:0;
+}
 .register-page {
   display: flex;
   min-height: 100vh;
   font-family: 'Urbanist', sans-serif;
 }
 
-/* צד שמאל עם טקסט שיווקי */
 .register-left {
   flex: 1;
-  background: linear-gradient(to right, #8bbee7,  #d9a7c7); /* אפשר להחליף לפלטה שלך */
-  color: white;
+  background: linear-gradient(to right, #8bbee7,  #d9a7c7); 
   padding: 80px 60px;
   display: flex;
   flex-direction: column;
@@ -27,7 +28,6 @@
   max-width: 500px;
 }
 
-/* צד ימין עם הטופס */
 .register-right {
   flex: 1;
   background-color: white;

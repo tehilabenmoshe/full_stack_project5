@@ -49,6 +49,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+.page-container{
+  padding-top: 5%;
+  height:100vh ;
+}
 
 
 .navbar{
@@ -141,8 +145,6 @@ button {
 
 /*********************home page***********************/
 
-
-
 .home-container {
   align-items: center;
   width: 100% ;
@@ -197,7 +199,7 @@ button {
 .hero-image img {
   width: 500px;
   max-width: 100%;
-  margin-right: 120px;
+  margin-right: 10%;
   margin-top: 50px;
 }
 
@@ -272,13 +274,6 @@ button {
 }
 /***********************************************************/
 
-.page-container{
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 60px; /* Adjust for navbar height */
-}
 
 
 /******************* Albums Page Styling ********************* */
@@ -492,79 +487,18 @@ button {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .albums-container {
-    padding: 20px 0;
-  }
-  
-  .albums-container h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  .albums-header {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .albums-container form {
-    flex-direction: column;
-    width: 90%;
-  }
-  
-  .albums-container form input[type="text"] {
-    min-width: auto;
-    width: 100%;
-  }
-  
-  .albums-search {
-    width: 90%;
-    margin-bottom: 30px;
-  }
-  
-  .albums-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 15px;
-  }
-  
-  .album-card {
-    padding: 25px;
-  }
-}
+/********************************************************************/
 
-@media (max-width: 480px) {
-  .albums-container h1 {
-    font-size: 28px;
-  }
-  
-  .albums-container > button,
-  .albums-container form button[type="submit"] {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-  
-  .albums-search {
-    padding: 12px 20px;
-    font-size: 14px;
-  }
-  
-  .album-card {
-    padding: 20px;
-  }
-  
-  .album-title {
-    font-size: 18px;
-  }
-}
-
-/***********************end albums page styling***********************/
-
+/**************************** Photos Page ****************************/
 .pothos-container {
+  width: 100%;
+  min-height: 100vh;
   max-width: 1200px;
-  margin: 0 auto;
+  margin-top:10%;
   padding: 20px;
+  position: relative; 
+
+
 }
 .photos-header{
   font-size: 1.5rem;
@@ -574,7 +508,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center; 
-  position: relative; 
 }
 .photos-header .add-photo-button  {
   position: absolute;
@@ -634,8 +567,6 @@ button {
   object-fit: cover;     
 }
 
-
-
 div.photo-title {
   padding: 8px;
   font-size: 0.9rem;
@@ -687,8 +618,6 @@ div.photo-title {
   cursor: not-allowed;
 }
 
-
-
 .photo-container{
   position: relative;
 }
@@ -712,7 +641,7 @@ div.photo-title {
 
 
 
-/*************photo details*************/
+/*************photo details page*************/
 
 .photo-details-container{
   text-align: center;
@@ -721,12 +650,14 @@ div.photo-title {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  position: relative;
+  height: 100%;
 }
 
 .photo-details{
   position: absolute;
-  top: 60%;
-  left: 350%;  
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -745,9 +676,11 @@ div.photo-title {
   
 }
 
-.back-button{
+.photo-details-container .back-button{
+  position: absolute;
+  top: 20%;
+  left: 7%;
   color: black;
-  margin-left:20%;
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
@@ -755,132 +688,222 @@ div.photo-title {
   cursor: pointer;
   align-self: start;
 }
-.back-button:hover {
+.photo-details-container .back-button:hover {
   background-color: #f0f0f0;
   color: #333;
   transform: scale(1.2);
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
-/******************info********************************/
+/****************************** Info Page ******************** */
+
 
 .info {
-  width: 550px;
-  padding: 30px 40px;
-  margin: 5% 0 0 30%;
-  background-color: #f1eeee;
-  border: 1px solid #000;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to right, #ed70cc52, #6fabf98a);
+  padding: 40px 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Main Info Card */
+.info > * {
+  max-width: 600px;
+  width: 100%;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  position: relative;
+}
+.info-card{
+  display: flex;
+  background-color: white;
+  width: 60%;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header Section */
 .info-header {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  position: relative;
+  text-align: center;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid rgba(90, 159, 247, 0.1);
+}
+
+.user-icon {
+  font-size: 80px;
+  color: #5a9ff7;
+  margin-bottom: 15px;
 }
 
 .info-header h2 {
-  font-size: 25px;
+  font-size: 28px;
+  color: #0c003e;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Edit Button */
+.info-card .edit-btn {
+  position: absolute;
+  top: 4%;
+  right: 10%;
+  background: linear-gradient(135deg, #c94fcf, #5a9ff7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
-  margin: 0;
-  color: #333;
-}
-
-.info-header h2 i {
-  color: #555;
-  font-size: 27px;
-}
-
-.user-icon{
-  font-size: 70px;
-  color: #333;
-}
-
-
-.user-details {
-  list-style: none;
-  padding-left: 0;
-  font-size: 20px;
-  color: #444;
-}
-
-.user-details li {
-  margin-bottom: 12px;
-}
-
-.user-details strong {
-  color: #222;
-}
-
-.user-details input {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
-  width: 60%;
-}
-
-.nested-info{
-  display: flex;
-  margin-left: 20px;
-  flex-direction: column;
-}
-
-.action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 30px;
-  gap: 12px;
-}
-
-.info button {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  border: none;
+  justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.info .edit-btn {
-  position: absolute;
-  right: 0px;
-  background-color: #989696;
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 40px;
-  width: 40px;
-  border-radius: 60px;
-  padding: 8px
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201, 79, 207, 0.3);
 }
 
 .info .edit-btn:hover {
-  background-color: #eee;
-  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 79, 207, 0.4);
+}
+
+/* User Details */
+.user-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-details li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.user-details li:hover {
+  border-left-color: #5a9ff7;
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(5px);
+}
+
+.user-details strong {
+  color: #0c003e;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: capitalize;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.user-details input {
+  padding: 8px 15px;
+  border: 2px solid rgba(90, 159, 247, 0.3);
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+  color: #0c003e;
+  transition: all 0.3s ease;
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.user-details input:focus {
+  outline: none;
+  border-color: #5a9ff7;
+  box-shadow: 0 0 0 3px rgba(90, 159, 247, 0.1);
+}
+
+/* Nested Information */
+.nested-info {
+  margin-top: 10px;
+  padding-left: 20px;
+  border-left: 2px solid rgba(90, 159, 247, 0.2);
+}
+
+.nested-info .user-details li {
+  background: rgba(90, 159, 247, 0.05);
+  padding: 12px 15px;
+  margin-bottom: 8px;
+}
+
+.nested-info .user-details li:hover {
+  background: rgba(90, 159, 247, 0.1);
+}
+
+.nested-info .user-details strong {
+  min-width: 100px;
+  font-size: 14px;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 2px solid rgba(90, 159, 247, 0.1);
 }
 
 .info .save-btn {
-  background-color: #222;
+  background: linear-gradient(135deg, #c94fcf, #5a9ff7);
   color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .info .save-btn:hover {
-  background-color: #111;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 79, 207, 0.3);
 }
 
 .info .cancel-btn {
-  background-color: #ddd;
+  background: white;
+  color: #0c003e;
+  border: 2px solid rgba(90, 159, 247, 0.3);
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .info .cancel-btn:hover {
-  background-color: #ccc;
+  border-color: #5a9ff7;
+  background: rgba(90, 159, 247, 0.05);
 }
+
+/* No User Message */
+.info:not(:has(.info-header)) {
+  font-size: 20px;
+  color: #0c003e;
+  text-align: center;
+  font-weight: 600;
+}
+
+/******************************************************************/
 
 .search-bar{
    appearance: none; /* מסיר את הסגנון הדפדפני */
@@ -908,3 +931,6 @@ div.photo-title {
   box-shadow: 0 0 0 3px rgba(201, 79, 207, 0.2);
 }
 
+/**{
+  outline: orangered 2px solid;
+}*/
