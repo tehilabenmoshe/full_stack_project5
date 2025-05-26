@@ -39929,7 +39929,7 @@
       "userId": 1,
       "id": "4",
       "title": "et porro tempora",
-      "completed": false
+      "completed": true
     },
     {
       "userId": 1,
@@ -40026,12 +40026,6 @@
       "id": "22",
       "title": "distinctio vitae autem nihil ut molestias quo",
       "completed": true
-    },
-    {
-      "id": "23",
-      "title": "יןיןין",
-      "completed": false,
-      "isNew": false
     },
     {
       "userId": 2,

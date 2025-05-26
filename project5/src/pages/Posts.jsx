@@ -80,19 +80,23 @@ export default function Posts() {
     <div className="posts-page-wrapper">
         <div className="posts-main-div">
             <h2 className="post-title">Your Posts </h2>
-
-            <div className="top-bar">
-                    <input
-                        className="search-bar"
-                        type="text"
-                        placeholder="Search..."
-                        value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
-                    />
-                    <button onClick={handleAddNew} className="add-button">
-                    + Add New Post
-                    </button>
+            
+            <div className="top-bar-wrapper">
+                <div className="top-bar">
+                        <input
+                            className="search-bar"
+                            type="text"
+                            placeholder="Search..."
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                        />
+                        <button onClick={handleAddNew} className="add-button">
+                        + 
+                        </button>
                 </div>
+
+            </div>
+            
 
 
             <ul className="posts-grid">

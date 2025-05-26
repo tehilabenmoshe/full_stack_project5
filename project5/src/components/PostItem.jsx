@@ -1,6 +1,9 @@
 import { getComments, addComment, deleteComment, updateComment } from "../services/postsService"; 
 import React, { useState } from "react";
-import { FaSave, FaTrash } from "react-icons/fa"; // אייקונים
+import { FaSave, FaTrash, FaEdit  } from "react-icons/fa"; // אייקונים
+import { MdEdit } from "react-icons/md"; // סגנון חומר (Material Design)
+
+
 
 export default function PostItem({post, user,onSave, onDelete }){
     const [expanded, setExpanded] = useState(false);
@@ -117,13 +120,17 @@ export default function PostItem({post, user,onSave, onDelete }){
                 <button
                     className="action-button"
                     onClick={(e) => {
-                    e.stopPropagation();
-                    setIsEditing(true);
-                    setEditTitlePost(post.title);
-                    setEditBodyPost(post.body);
+                        e.stopPropagation();
+                        setIsEditing(true);
+                        setEditTitlePost(post.title);
+                        setEditBodyPost(post.body);
                     }}
                     title="Edit"
-                >✏️</button>
+                    >
+                    <MdEdit />
+
+                </button>
+
             </div>
 
             <div className="post-title-box">
