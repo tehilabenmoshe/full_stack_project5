@@ -9,12 +9,18 @@ function Login({ setUser }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    if (!username.trim() || !password.trim()) {
+      setError('Please enter both username and password');
+      return;
+    }
     const res = await fetch(`http://localhost:3000/users?username=${username}&website=${password}`);
     const users = await res.json();
+    console.log('Fetched users:', users);
 
     if (users.length > 0) {
       setUser(users[0]); 
+      setUsername('');
+      setPassword('');
       setIsLoggedIn(true);
     } else {
       setError('password or username is incorrect');
