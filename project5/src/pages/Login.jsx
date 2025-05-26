@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
-import '../style/Register.css'; // שימוש באותו קובץ CSS כדי לשמור על אחידות
+import '../style/Register.css'; 
 
 function Login({ setUser }) {
   const [username, setUsername] = useState('');
@@ -20,8 +20,8 @@ function Login({ setUser }) {
 
     if (users.length > 0) {
       setUser(users[0]); 
-      setUsername('');
-      setPassword('');
+      setUsername(null);
+      setPassword(null);
       setIsLoggedIn(true);
     } else {
       setError('Password or username is incorrect');

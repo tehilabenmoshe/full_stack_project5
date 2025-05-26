@@ -8,12 +8,15 @@
 }
 
 .register-left {
-  flex: 1;
+  flex: 1.75;
   background: linear-gradient(to right, #8bbee7,  #d9a7c7); 
-  padding: 80px 60px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  padding-left: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width:fit-content;
 }
 
 .register-left h1 {
