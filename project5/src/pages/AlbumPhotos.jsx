@@ -1,6 +1,6 @@
-import { useParams, Outlet, Link } from 'react-router-dom';
+import { useParams,useNavigate, Outlet, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { FaSave,FaEdit, FaTrash,FaPlus,FaTimes } from "react-icons/fa";
+import { FaSave,FaArrowLeft, FaTrash,FaPlus,FaTimes } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 
 export default function AlbumPhotos() {
@@ -13,6 +13,7 @@ export default function AlbumPhotos() {
   const [newPhoto, setNewPhoto] = useState({ title: '', url: '' });
   const [editPhotoId, setEditPhotoId] = useState(null);
   const [editPhoto, setEditPhoto] = useState({ title: '', url: '' });
+  const navigate = useNavigate();
   const photosPerPage = 15; // 3 rows of 5 photos
 
   // Load photos from server with pagination
@@ -112,9 +113,12 @@ export default function AlbumPhotos() {
   return (
     <div className="photos-container">
       <div className="photos-header">
-        <h2 >Album {albumId}</h2>
-        <button onClick={() => setShowAdd(s => !s)} >
+        <button className='add-photo-button' onClick={() => setShowAdd(s => !s)} >
           {showAdd ? <><FaTimes /> Cancel</> : <><FaPlus /> Add Photo</> }
+        </button>
+        <h2 >Album {albumId}</h2>
+        <button className='back-button-a' onClick={() => navigate(-1)}>
+          <FaArrowLeft/>Go Back to Albums list
         </button>
       </div>
       {showAdd && (

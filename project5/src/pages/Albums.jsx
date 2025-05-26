@@ -59,8 +59,8 @@ function Albums() {
   return (
     <div className="albums-container">
       <h1>Albums</h1>
-      <button onClick={() => setShowAdd(s => !s)} >
-        {showAdd ? 'Cancel' : '+ Add Album'}
+      <button className='add-cancel-album-button' onClick={() => setShowAdd(s => !s)} >
+        {showAdd ? 'x' : '+ Add Album'}
       </button>
       {showAdd && (
         <form onSubmit={handleAddAlbum}>
