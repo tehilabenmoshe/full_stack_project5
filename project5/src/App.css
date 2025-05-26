@@ -274,59 +274,285 @@ button {
 }
 
 
+/******************* Albums Page Styling ********************* */
+
 .albums-container {
-  width: 90%;
-  display:flex;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to right, #ed70cc52, #6fabf98a);
+  padding: 40px 0;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-
+  position: relative;
 }
 
+.albums-container h1 {
+  font-size: 48px;
+  color: #0c003e;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Header Controls Section */
+.albums-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.add-cancel-album-button{
+  position: absolute;
+  left: 20px;
+  padding: 8px 16px;
+  top: 10%;
+}
+.albums-container > button {
+  background-color: transparent;
+  color: #000000;
+  font-size: 16px;
+  padding: 12px 30px;
+  border: 1px #5a9ff7 solid;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.albums-container > button:hover {
+  background: linear-gradient(to right, #c94fcf, #5a9ff7);
+  opacity: 0.85;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 79, 207, 0.3);
+}
+
+/* Add Album Form */
+.albums-container form {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 30px;
+}
+
+.albums-container form input[type="text"] {
+  padding: 12px 20px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  font-size: 16px;
+  background: white;
+  color: #0c003e;
+  min-width: 250px;
+  transition: all 0.3s ease;
+}
+
+.albums-container form input[type="text"]:focus {
+  outline: none;
+  border-color: #5a9ff7;
+  box-shadow: 0 0 0 3px rgba(90, 159, 247, 0.1);
+}
+
+.albums-container form button[type="submit"] {
+  background-color: #ffffff;
+  color: rgb(54, 138, 255);
+  font-size: 16px;
+  padding: 12px 25px;
+  border-radius: 25px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.albums-container form button[type="submit"]:hover {
+  border: 2px solid rgb(54, 138, 255);
+  transform: translateY(-1px);
+}
+
+/* Search Input */
 .albums-search {
-  margin-bottom: 16px;
   width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
+  max-width: 500px;
+  padding: 15px 25px;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0c003e;
+  margin-bottom: 40px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+.albums-search:focus {
+  outline: none;
+  border-color: #5a9ff7;
+  box-shadow: 0 0 0 3px rgba(90, 159, 247, 0.1);
+  background: white;
+}
+
+.albums-search::placeholder {
+  color: #888;
+}
+
+/* Albums Grid */
 .albums-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
+/* Album Cards */
 .album-card {
   display: block;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 20px;
+  padding: 30px;
   text-decoration: none;
-  color: inherit;
-  background: #f9f9f9;
-  box-shadow: 0 2px 8px #eee;
-  transition: box-shadow 0.2s;
+  color: #0c003e;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.album-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #c94fcf, #5a9ff7);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.album-card:hover::before {
+  transform: scaleX(1);
 }
 
 .album-card:hover {
-  box-shadow: 0 4px 16px #ddd;
-  background: #f1f7ff;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: white;
 }
 
 .album-id {
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #5a9ff7;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .album-title {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0c003e;
+  line-height: 1.4;
+  margin: 0;
 }
 
+/* Empty State */
 .albums-empty {
   grid-column: 1 / -1;
   text-align: center;
+  color: #0c003e;
+  font-size: 18px;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .albums-container {
+    padding: 20px 0;
+  }
+  
+  .albums-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .albums-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .albums-container form {
+    flex-direction: column;
+    width: 90%;
+  }
+  
+  .albums-container form input[type="text"] {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .albums-search {
+    width: 90%;
+    margin-bottom: 30px;
+  }
+  
+  .albums-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
+  .album-card {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .albums-container h1 {
+    font-size: 28px;
+  }
+  
+  .albums-container > button,
+  .albums-container form button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .albums-search {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .album-card {
+    padding: 20px;
+  }
+  
+  .album-title {
+    font-size: 18px;
+  }
+}
+
+/***********************end albums page styling***********************/
 
 .pothos-container {
   max-width: 1200px;
@@ -343,7 +569,19 @@ button {
   align-items: center; 
   position: relative; 
 }
-.photos-header button {
+.photos-header .add-photo-button  {
+  position: absolute;
+  right: 20px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: black;
+  border: 1px solid #0078d4;
+  height: 40px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.photos-header .back-button-a {
   position: absolute;
   left: 20px;
   padding: 8px 16px;
@@ -352,7 +590,6 @@ button {
   color: black;
   border: 1px solid #0078d4;
   height: 40px;
-  width: fit-content;
   border-radius: 50px;
   cursor: pointer;
 }
@@ -360,6 +597,7 @@ button {
   background-color: #5a9ff7;
   transition: background-color 0.3s;
 }
+
 
 .photos-grid {
   display: grid;
@@ -522,7 +760,7 @@ div.photo-title {
 .info {
   width: 550px;
   padding: 30px 40px;
-  margin: 5% 0 0 50%;
+  margin: 5% 0 0 30%;
   background-color: #f1eeee;
   border: 1px solid #000;
   border-radius: 12px;
