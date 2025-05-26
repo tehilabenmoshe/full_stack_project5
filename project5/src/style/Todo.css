@@ -1,5 +1,6 @@
 .todos-wrapper{
   font-family: 'Urbanist';
+   background-color: rgb(252, 252, 252);
 
 }
 .todo-div {
@@ -7,8 +8,47 @@
   font-family: 'Urbanist';
 }
 
+.todos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  margin-top: 50px;
+
+  
+}
+
+.todos-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  color: #0c003e;
+}
+
+.todos-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.center-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+
+
 .todo-div h2{
-    font-size: 35px;
+  font-size: 35px;
+  margin-left: 30px;
+  color:#0c003e;
 
 }
 
@@ -32,23 +72,47 @@
   justify-content: center;
 }
 
-.search-bar{
-    margin-right: 50px;
-    height: 35px;
-    width: 400px;
-    border-radius: 8px;
-    padding-left: 10px;
-    border: none;
-    background-color: rgb(227, 227, 227);
 
-}
 
-.add-button {
+.add-button-todos {
   font-size: 20px;
   padding: 6px 12px;
   margin-bottom: 10px;
   float: right;
   cursor: pointer;
-  margin-right: 200px;
+  margin-right: 60px;
+  background-color: #c94fcf;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+}
+
+
+
+
+select {
+  appearance: none; /* מסיר את הסגנון הדפדפני */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  padding: 8px 14px;
+  border-radius: 30px;
+  border: 2px solid #78b1fa;
+  background-color: #fff;
+  color: #4e4d4d;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+select:hover {
+  border-color: #3383e5;
+}
+
+select:focus {
+  outline: none;
+  border-color: #c94fcf;
+  box-shadow: 0 0 0 3px rgba(201, 79, 207, 0.2);
 }
 

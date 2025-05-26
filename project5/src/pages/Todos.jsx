@@ -98,34 +98,39 @@ export default function Todos() {
   return (
     <div className="todos-wrapper">
         <div className="todo-div">
-            <h2 className="todos-title">My Task List</h2>
 
-            <button onClick={handleAddNew} className="add-button">
-            + Add Task
-            </button>
+            <section className="todos-header">
+                <h2 className="todos-title">My Task List</h2>
 
-                    
-            <div className="controls-row">
-                <label htmlFor="sort-select">Sort By </label>
-                <select
-                    id="sort-select"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                >
-                    <option value="id">Id</option>
-                    <option value="title">Title</option>
-                    <option value="completed">Status</option>
-                </select>
+                <div className="todos-controls">
+                    <div className="center-controls">
+                    <label htmlFor="sort-select">Sort By</label>
+                    <select
+                        id="sort-select"
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                    >
+                        <option value="id">Id</option>
+                        <option value="title">Title</option>
+                        <option value="completed">Status</option>
+                    </select>
 
-                <input className="search-bar"
-                    type="text"
-                    placeholder="search"
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                />
-            </div>
+                    <input
+                        className="search-bar"
+                        type="text"
+                        placeholder="search"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    </div>
 
-                    
+                    <button onClick={handleAddNew} className="add-button-todos">
+                    +
+                    </button>
+                </div>
+            </section>
+
+                                    
             <ul className="todo-list-grid">
                 {sortedTodos.map((todo) => (
                 <TodoItem

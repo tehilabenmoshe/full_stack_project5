@@ -1,0 +1,99 @@
+.register-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Urbanist', sans-serif;
+}
+
+/* צד שמאל עם טקסט שיווקי */
+.register-left {
+  flex: 1;
+  background: linear-gradient(to right, #8bbee7,  #d9a7c7); /* אפשר להחליף לפלטה שלך */
+  color: white;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register-left h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #0c003e;
+}
+
+.register-left p {
+  font-size: 20px;
+  color: #2e2e2e;
+  max-width: 500px;
+}
+
+/* צד ימין עם הטופס */
+.register-right {
+  flex: 1;
+  background-color: white;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-right h2 {
+  font-size: 32px;
+  color: #0c003e;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+}
+
+.register-form input {
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.register-form input:focus {
+  border-color: #5a9ff7;
+}
+
+.register-form button {
+  background: linear-gradient(to right, #c94fcf, #5a9ff7);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.register-form button:hover {
+  opacity: 0.85;
+}
+
+.login-link {
+  margin-top: 10px;
+  text-align: center;
+  color: #444;
+}
+
+.login-link a {
+  color: #5a9ff7;
+  text-decoration: none;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
