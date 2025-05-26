@@ -5,7 +5,7 @@ import { MdEdit } from "react-icons/md"; // סגנון חומר (Material Design
 
 
 
-export default function PostItem({post, user,onSave, onDelete }){
+export default function PostItem({post, user, onSave, onDelete }){
     const [expanded, setExpanded] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState([]);
@@ -42,7 +42,6 @@ export default function PostItem({post, user,onSave, onDelete }){
 
         const newComment = {
             postId: post.id,
-            userId: user.id,
             name: commentTitle.trim(), 
             email: user.email,
             body: commentBody.trim(), 
@@ -77,7 +76,6 @@ export default function PostItem({post, user,onSave, onDelete }){
     const handleSaveEdit = async () => {
         const updated = {
             postId: post.id,
-            userId: user.id,
             name: editTitle.trim(),
             email: user.email,
             body: editBody.trim(),

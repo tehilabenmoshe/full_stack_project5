@@ -58,10 +58,8 @@ function Albums() {
 
   return (
     <div className="albums-container">
-      <h1>Albums</h1>
-      <button className='add-cancel-album-button' onClick={() => setShowAdd(s => !s)} >
-        {showAdd ? 'x' : '+ Add Album'}
-      </button>
+      <h1>Your Albums</h1>
+      
       {showAdd && (
         <form onSubmit={handleAddAlbum}>
           <input
@@ -74,13 +72,23 @@ function Albums() {
           <button type="submit">Save</button>
         </form>
       )}
-      <input
-        type="text"
-        placeholder="Search by id or title..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="albums-search"
-      />
+      
+      <div className="albums-controls">
+        <input
+          type="text"
+          placeholder="Search by id or title..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="albums-search"
+        />
+        <button
+          className="add-album-button"
+          onClick={() => setShowAdd(s => !s)}
+        >
+          {showAdd ? 'x' : '+'}
+        </button>
+      </div>
+
       <div className="albums-grid">
         {filtered.map(album => (
           <Link
