@@ -754,6 +754,7 @@ div.photo-title {
   position: relative;
 }
 .info-card{
+  margin-top: 3%;
   display: flex;
   background-color: white;
   width: 60%;
