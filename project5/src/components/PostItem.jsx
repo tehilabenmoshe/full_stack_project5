@@ -118,8 +118,8 @@ export default function PostItem({post, user, onSave, onDelete }){
                     className="action-button"
                     title="Delete"
                     onClick={() => {
-                        if (window.confirm("Are you sure you want to delete this comment?")) {
-                        handleDeleteComment(editingCommentId);
+                        if (confirm("Are you sure you want to delete this comment?")) {
+                            handleDelete();
                         }
                     }}
                     >

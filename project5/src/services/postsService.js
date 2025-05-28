@@ -52,7 +52,7 @@ export async function addPost(post) {
 // UPDATE POST
 export async function updatePost(post) {
   const response = await fetch(`${BASE_URL}/posts/${post.id}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
@@ -71,6 +71,7 @@ export async function updatePost(post) {
 
 //GET COMMENT BY ID
 export async function getComments(postId) {
+  console.log(postId);
   const response = await fetch(`${BASE_URL}/comments?postId=${postId}`);
   if (!response.ok) {
     throw new Error("Failed to fetch comments");
@@ -111,7 +112,7 @@ export async function deleteComment(commentId) {
 //UPDATE COMMENT
 export async function updateComment(commentId, updatedComment) {
   const response = await fetch(`${BASE_URL}/comments/${commentId}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },

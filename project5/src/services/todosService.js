@@ -8,7 +8,7 @@ export async function getTodos(userId) {
 // עדכון פריט (PUT)
 export async function updateTodo(todo) {
   const response = await fetch(`${BASE_URL}/todos/${todo.id}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
